@@ -10,6 +10,7 @@
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage{listings}
+\usepackage{amsmath}
 \begin{document}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -81,20 +82,74 @@ $A = \{x \in \Re | -1 \leq x \leq 2\}$
 
 $B = \{x \in \Re |  1 \leq x \leq 4\}$ 
 \begin{enumerate}
-\item[i.] Encontre a função característica de A e B.
 
+\item[i.] Encontre a função característica de A e B.
+%-------------------------------------------------------------------------------------------------
+
+\begin{equation*}
+\mu_A (x) = 
+\begin{cases} 
+1, & \text{se $-1 \leq x \leq 2$}
+\\
+0, &\text{caso contrário}
+\end{cases}
+\end{equation*}
+
+\begin{equation*}
+\mu_B (x) = 
+\begin{cases} 
+1, & \text{se $1 \leq x \leq 4$}
+\\
+0, &\text{caso contrário}
+\end{cases}
+\end{equation*}
+
+
+%-------------------------------------------------------------------------------------------------
 \item[ii.] Determine a união, a interseção, e o complemento dos conjuntos A e B em termos de suas funções características.
 \end{enumerate}
+%-------------------------------------------------------------------------------------------------
 
+$\mu_{A \cup B} = max \lbrace\mu_A, \mu_B\rbrace$
+
+$\mu_{A \cap B} = min \lbrace \mu_A, \mu_B   \rbrace  = \mu_A \mu_B $
+
+$\mu_{A - B}    = max \lbrace \mu_A - \mu_B, 0 \rbrace   $
+
+$\mu_{B - A}    = max \lbrace \mu_B - \mu_A, 0 \rbrace   $
+
+$A \cup B = \lbrace x \vert \mu_{A \cup B }(x) = 1 \rbrace$
+
+$A \cap B = \lbrace x \vert \mu_{A \cap B }(x) = 1 \rbrace$
+
+$A - B = \lbrace x \vert \mu_{A - B }(x) = 1 \rbrace$
+
+$B - A = \lbrace x \vert \mu_{B - A }(x) = 1 \rbrace$
+
+%-------------------------------------------------------------------------------------------------
 \item[2] Encontre a função característica do conjunto $E = \{ x | x \neq x \}$.
+%-------------------------------------------------------------------------------------------------
 
+$ \mu_E(x) = 0$ 
 
+%-------------------------------------------------------------------------------------------------
 \item[3] Demonstre as leis de De Morgan, ou seja:
 
 \begin{enumerate}
     \item[i.] $\overline{A \cap B} = \overline{A} \cup \overline{B}$
 
+    $\mu_{\overline{A \cap B}} = 1 - \mu_{A \cap B} $
+    
+\hspace{0.9 cm}    $ = 1 - \mu_A \mu_B$
+
+ \hspace{0.9 cm}   $ = (1 - \mu_A) + (1 - \mu_B) - (1 - \mu_A)(1-\mu_B)$
+
+ \hspace{0.9 cm}   $ = \mu_{\overline{A}} + \mu_{\overline{B}} - \mu_{\overline{A}\cap\overline{B}}$
+
+\hspace{0.9 cm}  $ = \mu_{\overline{A}\cup\overline{B}} $ 
+
     \item[ii.] $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+
 \end{enumerate}
 
 
