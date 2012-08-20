@@ -162,29 +162,40 @@ $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
 \begin{enumerate}
 \item[i.] Como você definiria para um profissional leigo o que é um sistema Fuzzy.
 
-Sistemas Fuzzy são sistemas que utiliza de informações imprecisas para tomar decisões, semelhante 
-ao modelo de tomada de decisões dos seres humanos. Por exemplo, uma pessoa pode achar que está ``um pouco'' 
-frio e então procurar se agasalhar. O sistema de decisão adotado por essa pessoa, é um modelo Fuzzy. 
+Sistemas Fuzzy são sistemas que utilizam de informações imprecisas para tomar decisões, sendo semelhantes 
+ao modelo de tomada de decisões dos seres humanos. Por exemplo, uma pessoa pode achar que está ``um pouco
+frio'' e então procurar se agasalhar. O sistema de decisão adotado por essa pessoa é um modelo Fuzzy. 
 
-Note que dessa maneira, uma variável pode pertencer a mais de uma classe com diferentes níveis de verdade. Uma pessoa no
-mesmo ambiente que esteja praticando atividade física, possivelmente falaria que a sensação térmica está ``normal'' ou mesmo
+Note que dessa maneira uma variável (no caso, a temperatura ambiente) 
+pode pertencer a mais de uma classe com diferentes níveis de verdade. Uma pessoa no
+mesmo ambiente que esteja praticando atividade física possivelmente falaria que a sensação térmica é ``normal'' ou mesmo
 ``calor''.
 
 \item[ii.] Explicite um exemplo de aplicação em que poderia ser utilizado um sistema Fuzzy, 
 enumerando as características das variáveis de entrada e de saída.
 
-Um exemplo de uma aplicação é um sistema de questionário que estima qual a chance de uma pessoa que não tem diabetes tipo 2
+Um exemplo de uma aplicação é um sistema que estima qual a chance de uma pessoa que não tem diabetes tipo 2
 desenvolver a doença no futuro de acordo com o estilo de vida. 
 
-Entre as entradas podemos citar por exemplo quantidade 
+Entre as entradas podemos citar, por exemplo, quantidade 
 de exercício por dia (pouco, normal, muito), consumo de doces (pouco, razoável, muito), peso (magro, normal, obeso) e 
-estatura (baixa, normal, alta).  Como variável de saída, chance de desenvolver diabetes (pequena, média da população, alta).
+estatura (baixa, normal, alta).  Como variável de saída, a probabilidade de desenvolver diabetes (pequena, média, alta).
 
 \item[iii.] Discorra quando um determinado tipo de problema se torna qualificável para 
 resolvê-lo pela aplicação de sistemas Fuzzy.
 
-Um problema se torna qualificável para resolver utilizando sistemas Fuzzy quando as variáveis tratadas pelo sistema são
-variáveis que descrevem imprecisão ou quando há conceitos subjetivos envolvidos.
+Um problema se torna qualificável para ser resolvido utilizando sistemas fuzzy quando as variáveis de entrada tratadas pelo sistema
+descrevem imprecisão ou quando há conceitos subjetivos envolvidos. Ex.: um sistema que determina se uma pessoa apresentará problemas
+de saúde baseado no consumo de frutas, água etc., consumo esse descrito em termos qualitativos (pouco, médio, muito).
+
+Quando a saída do sistema não possuir uma definição
+exata e quantitativa, ele também é mais apropriado para ser descrito como um sistema fuzzy.
+Ex.: um sistema de controle de freios de modo que a parada do carro não seja muito brusca (saída: confortabilidade
+do passageiro durante a frenagem do carro).
+
+Além disso, certos problemas passíveis de serem resolvidos por sistemas exatos, mas com um conjunto de variáveis
+de entrada muito grande ou que necessitem de diversos sensores para uma captação quantitativa dos dados,
+podem ser resolvidos de forma menos complexa por sistemas fuzzy.
 
 \end{enumerate}
 
