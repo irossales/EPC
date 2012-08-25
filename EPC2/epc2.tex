@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \begin{document}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -76,7 +77,29 @@ Jonas Rossi \textsc{Dourado}\\
 
 \begin{enumerate}
 
-\item[1] Considere o conjunto \emph{fuzzy} A definido no universo de discurso $X = \{ x \in  \}$
+\item[1] Considere o conjunto \emph{fuzzy} A definido no universo de discurso $X = \{ x \in  \mathbb{R} \vert 0 \le x \le 10\}$,
+o qual é representado pela seguinte função de pertinência:
+
+
+\begin{equation*}
+\mu_A (x) = 
+\begin{cases} 
+0,5x-1,5, & \text{se $3 \leq x \leq 5$}
+\\
+-0,5x+3,5, & \text{se $5 < x \leq 7$}
+\\
+0, &\text{caso contrário}
+\end{cases}
+\end{equation*}
+
+\begin{enumerate}
+    \item[a)] Esboce o gráfico da função de pertinência representada acima, indicando também qual é o seu tipo.
+    \item[b)] Sabendo-se que a função acima está representando o conjunto referente à temperatura ``média'' de um determinado
+    processo industrial, explique então qual o significado que está embutido em tal representação.
+    \item[c)] Explique se o conjunto \emph{fuzzy} acima é considerado um conjunto normalizado.
+    \item[d)] Obtenha o conjunto suporte associado ao conjunto \emph{fuzzy} acima.
+\end{enumerate}
+
 
 \end{enumerate}
 
