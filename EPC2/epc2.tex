@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage{hyperref}
+%\usepackage{hyperref}
 \usepackage[portuges,brazilian]{babel}
 \usepackage{graphicx}
 \usepackage{textcomp}
@@ -94,20 +94,50 @@ o qual é representado pela seguinte função de pertinência:
 
 \begin{enumerate}
     \item[a)] Esboce o gráfico da função de pertinência representada acima, indicando também qual é o seu tipo.
+
+        \begin{figure}[hptb]
+        \centering
+        \includegraphics[scale=0.3]{ex1a.png}
+        \caption{Função de pertinência.}
+        \label{fig:1a}
+        \end{figure}
+    
+    De acordo com o gráfico da função de pertinência (Figura \ref{fig:1a}), temos que seu tipo é triangular.
+        
+
     \item[b)] Sabendo-se que a função acima está representando o conjunto referente à temperatura ``média'' de um determinado
     processo industrial, explique então qual o significado que está embutido em tal representação.
+
+    De acordo com a representação, a temperatura média está em torno de 5 (unidade não especificada), mas com certeza não
+    é menor que 3 ou maior que 7. 
+
     \item[c)] Explique se o conjunto \emph{fuzzy} acima é considerado um conjunto normalizado.
+
+    O conjunto é normalizado porque pelo menos um de seus elementos possui grau de pertinência igual a 1 (elemento 5).
+
+
     \item[d)] Obtenha o conjunto suporte associado ao conjunto \emph{fuzzy} acima.
+
+    $SUPP(A) = \{ x \in  \mathbb{R} \vert \mu_A(x) > 0\} = \{ x \in \mathbb{R} \vert x \in ]3;7[ \}$
+
 \end{enumerate}
 
 \item[2] Calcule a cardinalidade dos conjuntos \emph{fuzzy} discretos dados a seguir:
 \begin{enumerate}
     \item[a)] $A = 0,3/x_1 + 0,5/x_2 + 0,9/x_3 + 0,4/x_4 + 0,1/x_5$
+
+    $CARD(A) = 0,3+0,5+0,9+0,4+0,1 = 2,2 $
+
     \item[b)] $A = 0,0/x_1 + 0,4/x_2 + 1,0/x_3 + 1,0/x_4 + 0,4/x_5 + 0,0/x_6$
+
+    $CARD(A) = 0,4 1,0+ 1,0 + 0,4 = 2,8$
+
+
     \item[c)] $\mu_c(x)=\frac{x}{x+1}, \text{com } x \in \{0,1,2,...,10 \}$
+
+    $ CARD(A) = \sum\limits_{x=0}^{10}\mu_C(x) = 7,98$ 
+
 \end{enumerate}
-
-
 
 
 \item[3] Uma equipe de engenheiros e cientistas obteve a partir de experimentação diversos valores de
