@@ -114,11 +114,11 @@ o qual é representado pela seguinte função de pertinência:
 $\alpha$-cortes referentes a um conjunto \emph{fuzzy} V que está sendo mapeado, o qual está representando o
 ajuste de vazão v de uma coluna de destilação de petróleo. Os valores referentes aos $\alpha$-cortes são
 dados a seguir:\\
-$V_{0.00} = {v \in \Re / 2,0 \leq v \leq 8,0}$\\
-$V_{0.25} = {v \in \Re / 2,5 \leq v \leq 7,5}$\\
-$V_{0.50} = {v \in \Re / 3,0 \leq v \leq 7,0}$\\
-$V_{0.75} = {v \in \Re / 3,5 \leq v \leq 6,5}$\\
-$V_{1.00} = {v \in \Re / 4,0 \leq v \leq 6,0}$\\
+$V_{0.00} = \{v \in \Re / 2,0 \leq v \leq 8,0\}$\\
+$V_{0.25} = \{v \in \Re / 2,5 \leq v \leq 7,5\}$\\
+$V_{0.50} = \{v \in \Re / 3,0 \leq v \leq 7,0\}$\\
+$V_{0.75} = \{v \in \Re / 3,5 \leq v \leq 6,5\}$\\
+$V_{1.00} = \{v \in \Re / 4,0 \leq v \leq 6,0\}$\\
 A partir das informações acima reconstrua um gráfico representativo deste conjunto, obtendo
 ainda a sua expressão analítica.
 
@@ -127,10 +127,27 @@ ainda a sua expressão analítica.
 triangular ou trapezoidal. Discorra sobre que subsídios você usaria para escolher uma dessas
 funções para representar este conjunto. Explicite os seus argumentos através de um exemplo.
 
+Para escolher mapear um conjunto \emph{fuzzy}, entre uma função de pertinência triangular ou uma trapezoidal, 
+é necessário ter um conhecimento prévio por parte do projetista(que pode ser obtido a partir de experiência própria 
+ou pesquisa). 
+
+A partir do conhecimento prévio é possível decidir(de forma algebricamente ou a partir da experiência do projetista)
+qual função se adéqua mais ao conjunto \emph{fuzzy} em questão. 
+
+Por exemplo temos a situação em que a velocidade do motor(Universo de discurso de 0 rpm até 10000 rpm) de uma centrifuga é mapeada 
+em um conjunto \emph{fuzzy} ``adequado à aplicação''. O conjunto \emph{fuzzy} ``adequado à aplicação'' é razoável ser mapeado
+para uma função de pertinência trapezoidal pois em uma centrifuga há faixas de velocidade adequada a opção escolhida pelo usuário.
+
 
 \item[5] Explique se a afirmação seguinte é verdadeira ou falsa: “Se um conjunto \emph{fuzzy} contínuo em
 seu universo de discurso tiver algum de seus $\alpha$-cortes também contínuo, então o referido
 conjunto é considerado convexo”.
+
+A afirmação apresentada no exercício é falsa pois pode haver $\alpha$-cortes que são contínuos e ainda assim 
+existir $\alpha$-cortes deslocados por um $\theta$ negativo qualquer ($A_{\alpha-\theta}$) que não são contínuos(caracterizando
+assim um conjunto \emph{fuzzy} não convexo). Para tornar a afirmação verdadeira, seria necessário que \emph{todos} os seus $\alpha$-cortes 
+fossem contínuos.
+
 
 \end{enumerate}
 
