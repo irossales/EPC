@@ -181,16 +181,24 @@ $\alpha$-cortes. Temos que:
 triangular ou trapezoidal. Discorra sobre que subsídios você usaria para escolher uma dessas
 funções para representar este conjunto. Explicite os seus argumentos através de um exemplo.
 
-Para escolher mapear um conjunto \emph{fuzzy}, entre uma função de pertinência triangular ou uma trapezoidal, 
-é necessário ter um conhecimento prévio por parte do projetista(que pode ser obtido a partir de experiência própria 
+Para escolher mapear um conjunto \emph{fuzzy} entre uma função de pertinência triangular ou uma trapezoidal
+é necessário ter um conhecimento prévio por parte do projetista (que pode ser obtido a partir de experiência própria 
 ou pesquisa). 
 
-A partir do conhecimento prévio é possível decidir(de forma algebricamente ou a partir da experiência do projetista)
+A partir do conhecimento prévio é possível decidir 
 qual função se adéqua mais ao conjunto \emph{fuzzy} em questão. 
+Se o conjunto a ser mapeado apresenta uma faixa de valores com grau de pertinência iguais, a função trapezoidal
+é a mais indicada. Caso haja apenas um elemento com o valor do maior grau de pertinência, pode-se utilizar a função
+triangular.
 
-Por exemplo temos a situação em que a velocidade do motor(Universo de discurso de 0 rpm até 10000 rpm) de uma centrifuga é mapeada 
-em um conjunto \emph{fuzzy} ``adequado à aplicação''. O conjunto \emph{fuzzy} ``adequado à aplicação'' é razoável ser mapeado
-para uma função de pertinência trapezoidal pois em uma centrifuga há faixas de velocidade adequada a opção escolhida pelo usuário.
+Por exemplo, temos a situação em que a velocidade do motor de uma centrífuga é representada
+em um conjunto \emph{fuzzy} ``adequado à aplicação'' (universo de discurso de 0 rpm até 10000 rpm). 
+O conjunto \emph{fuzzy} ``adequado à aplicação'' é razoável 
+de ser mapeado
+para uma função de pertinência trapezoidal pois em uma centrífuga há faixas de velocidade adequadas à opção escolhida pelo usuário.
+Por outro lado, ao se dizer que a temperatura média em uma determinada cidade está em torno de $25^o$ C, 
+a função mais indicada que mapeia o conjunto correspondente é a triangular.
+
 
 
 \item[5] Explique se a afirmação seguinte é verdadeira ou falsa: “Se um conjunto \emph{fuzzy} contínuo em
@@ -198,7 +206,7 @@ seu universo de discurso tiver algum de seus $\alpha$-cortes também contínuo, 
 conjunto é considerado convexo”.
 
 A afirmação apresentada no exercício é falsa pois pode haver $\alpha$-cortes que são contínuos e ainda assim 
-existir $\alpha$-cortes deslocados por um $\theta$ negativo qualquer ($A_{\alpha-\theta}$) que não são contínuos(caracterizando
+existir $\alpha$-cortes deslocados por um $\theta$ qualquer ($A_{\alpha+\theta}$) que não são contínuos (caracterizando
 assim um conjunto \emph{fuzzy} não convexo). Para tornar a afirmação verdadeira, seria necessário que \emph{todos} os seus $\alpha$-cortes 
 fossem contínuos.
 
