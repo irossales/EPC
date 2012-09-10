@@ -2,7 +2,7 @@ import matplotlib
 import matplotlib.pylab
 import numpy
 
-N_POINTS = 200
+N_POINTS = 1000
 
 # Exercise 1b
 def ua(x):
@@ -67,16 +67,23 @@ def plot_u():
 
 # Exercise 1c
 def active_u(x):
+    active = []
     if ua(x) > 0.0:
         print 'A',
+        active.append('A')
     if ub(x) > 0.0:
         print 'B',
+        active.append('B')
     if uc(x) > 0.0:
         print 'C',
+        active.append('C')
     if ud(x) > 0.0:
         print 'D',
+        active.append('D')
     if ue(x) > 0.0:
         print 'E'
+        active.append('E')
+    return active
 
 # Exercise 1d
 def u(active, x):
@@ -106,6 +113,136 @@ def crisp(active, value):
     elif active == 'E':
         return filter (lambda a: ue(a) >= value, x)
 
+def ex2b():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    ya = map(ua, x)
+    yb = map(ub, x)
+    yc = map(uc, x)
+    yd = map(ud, x)
+    ye = map(ue, x)
+    
+    matplotlib.pyplot.scatter(x, map(lambda a,b,c,d,e: max([a,b,c,d,e]), ya, yb, yc, yd, ye), c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('ua(x) U ub(x) U uc(x) U ud(x) U ue(x)')
+    matplotlib.pyplot.show()
+
+def ex2c():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    ya = map(ua, x)
+    yb = map(ub, x)
+    yc = map(uc, x)
+    yd = map(ud, x)
+    ye = map(ue, x)
+    
+    matplotlib.pyplot.scatter(x, map(lambda a,b,c,d,e: min([a,b,c,d,e]), ya, yb, yc, yd, ye), c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('min{ua(x),ub(x),uc(x),ud(x),ue(x)}')
+    matplotlib.pyplot.show()
+
+def ex2d():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    yc = map(lambda a: 1-uc(a), x)
+    
+    matplotlib.pyplot.scatter(x, yc, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('uc\(x)')
+    matplotlib.pyplot.show()
+
+def ex3a():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [0]*N_POINTS
+
+    for i in active_u(16.75):
+        union = map(lambda q,w: max([q,w]), union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('max{active_u(16.75)}')
+    matplotlib.pyplot.show()
+
+def ex3b():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [0]*N_POINTS
+
+    for i in active_u(37.29):
+        union = map(lambda q,w: max([q,w]), union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('max{active_u(37.29)}')
+    matplotlib.pyplot.show()
+
+def ex3c():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [1]*N_POINTS
+
+    for i in active_u(20):
+        union = map(lambda q,w: min([q,w]), union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('min{active_u(20)}')
+    matplotlib.pyplot.show()
+
+def ex3d():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [1]*N_POINTS
+
+    for i in active_u(40):
+        union = map(lambda q,w: min([q,w]), union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('min{active_u(40)}')
+    matplotlib.pyplot.show()
+
+def ex4a():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [0]*N_POINTS
+
+    for i in active_u(16.75):
+        union = map(lambda q,w: q+w-q*w, union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('union{active_u(16.75)}')
+    matplotlib.pyplot.show()
+
+def ex4b():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [0]*N_POINTS
+
+    for i in active_u(37.29):
+        union = map(lambda q,w: q+w-q*w, union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('union{active_u(37.29)}')
+    matplotlib.pyplot.show()
+
+def ex4c():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [1]*N_POINTS
+
+    for i in active_u(20):
+        union = map(lambda q,w: q*w, union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('intersection{active_u(20)}')
+    matplotlib.pyplot.show()
+
+def ex4d():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+    union = [1]*N_POINTS
+
+    for i in active_u(40):
+        union = map(lambda q,w: q*w, union, map(lambda a: u(i, a), x))
+    
+    matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('intersection{active_u(40)}')
+    matplotlib.pyplot.show()
 
 if __name__ == "__main__":
-    print crisp('C', 0.5)
+    ex4d() 
