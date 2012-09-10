@@ -90,6 +90,66 @@ representam a temperatura de um processo industrial.
 
 \item[a)] Encontre as expressões analíticas referentes a cada um dos conjuntos \emph{fuzzy}.
 
+\begin{equation*}
+\mu_A (x) = 
+\begin{cases} 
+1           & \text{se $0 \leq x \leq 5$}
+\\
+-0,1x+1,5,  & \text{se $5 < x  \leq 15$}
+\\
+0,          & \text{caso contrário}
+\end{cases}
+\end{equation*}
+
+\begin{equation*}
+\mu_B (x) = 
+\begin{cases} 
+0           & \text{se $0 \leq x \leq 5$}
+\\
+0,1x-0,5,  & \text{se $5 < x  \leq 15$}
+\\
+-0,1x+2,5,  & \text{se $15 < x  \leq 25$}
+\\
+0,          & \text{caso contrário}
+\end{cases}
+\end{equation*}
+
+\begin{equation*}
+\mu_C (x) = 
+\begin{cases} 
+0           & \text{se $0 \leq x \leq 15$}
+\\
+0,1x-1,5,  & \text{se $15 < x  \leq 25$}
+\\
+-0,1x+3,5,  & \text{se $25 < x  \leq 35$}
+\\
+0,          & \text{caso contrário}
+\end{cases}
+\end{equation*}
+
+\begin{equation*}
+\mu_D (x) = 
+\begin{cases} 
+0           & \text{se $0 \leq x \leq 25$}
+\\
+0,1x-2,5,  & \text{se $25 < x  \leq 35$}
+\\
+-0,1x+4,5,  & \text{se $35 < x  \leq 45$}
+\\
+0,          & \text{caso contrário}
+\end{cases}
+\end{equation*}
+
+\begin{equation*}
+\mu_E (x) = 
+\begin{cases} 
+0,1x-3,5,  & \text{se $35 \leq x  \leq 45$}
+\\
+1           & \text{se $45 < x \leq 50$}
+\\
+0,          & \text{caso contrário}
+\end{cases}
+\end{equation*}
 
 \item[b)] Elabore os procedimentos computacionais que permitam mapear os conjuntos \emph{fuzzy} acima,
 utilizando para tanto 1000 pontos de discretização. {Sugestão: Utilize Arrays}. Para checar o nível de 
