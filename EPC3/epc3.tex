@@ -177,6 +177,9 @@ corte$ efetuado.
 \emph{fuzzy} quando utilizamos 50 e 1000 pontos de discretização para representá-los, explicando
 ainda a importância de se especificar corretamente este parâmetro.
 
+É importante não aumentar excessivamente o número de pontos de discretização a fim de evitar excesso de 
+uso dos recursos de armazenamento disponíveis. Entretanto, caso o número de pontos de discretização seja baixo, 
+pode haver um aumento imprecisão dos valores obtidos.
 
 \item[b)] Imprima o conjunto \emph{fuzzy} resultante da União dos cinco conjuntos \emph{fuzzy} definidos acima,
 utilizando para tanto 1000 pontos de discretização e o operador Máximo.
@@ -222,12 +225,21 @@ das seguintes operações:
 \newpage
 
 Ex 2a.
-\begin{figure}[hptb]
-\includegraphics[scale=0.5]{ex1b1000.png}
+\begin{figure}[h]
+        \begin{subfigure}[b]{0.6\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{ex1b1000.png}
+	\caption{1000 pontos de discretização}
+        \end{subfigure}
 \end{figure}
-\begin{figure}[hptb]
-\includegraphics[scale=0.5]{ex2a50.png}
+\begin{figure}[h]
+	\begin{subfigure}[b]{0.6\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{ex2a50.png}
+	\caption{1000 pontos de discretização}
+	\end{subfigure}
 \end{figure}
+
 
 \newpage
 Ex 2 b,c,d
