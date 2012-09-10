@@ -121,7 +121,8 @@ def ex2b():
     yd = map(ud, x)
     ye = map(ue, x)
     
-    matplotlib.pyplot.scatter(x, map(lambda a,b,c,d,e: max([a,b,c,d,e]), ya, yb, yc, yd, ye), c = "black", marker = 'o')
+    matplotlib.pyplot.scatter(x, map(lambda a,b,c,d,e: 
+        max([a,b,c,d,e]), ya, yb, yc, yd, ye), c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
     matplotlib.pyplot.ylabel('ua(x) U ub(x) U uc(x) U ud(x) U ue(x)')
     matplotlib.pyplot.show()
@@ -134,7 +135,8 @@ def ex2c():
     yd = map(ud, x)
     ye = map(ue, x)
     
-    matplotlib.pyplot.scatter(x, map(lambda a,b,c,d,e: min([a,b,c,d,e]), ya, yb, yc, yd, ye), c = "black", marker = 'o')
+    matplotlib.pyplot.scatter(x, map(lambda a,b,c,d,e: 
+        min([a,b,c,d,e]), ya, yb, yc, yd, ye), c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
     matplotlib.pyplot.ylabel('min{ua(x),ub(x),uc(x),ud(x),ue(x)}')
     matplotlib.pyplot.show()
@@ -153,7 +155,8 @@ def ex3a():
     union = [0]*N_POINTS
 
     for i in active_u(16.75):
-        union = map(lambda q,w: max([q,w]), union, map(lambda a: u(i, a), x))
+        union = map(lambda q,w: max([q,w]), union, 
+            map(lambda a: u(i, a), x))
     
     matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
@@ -165,7 +168,8 @@ def ex3b():
     union = [0]*N_POINTS
 
     for i in active_u(37.29):
-        union = map(lambda q,w: max([q,w]), union, map(lambda a: u(i, a), x))
+        union = map(lambda q,w: max([q,w]), union, 
+            map(lambda a: u(i, a), x))
     
     matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
@@ -177,7 +181,8 @@ def ex3c():
     union = [1]*N_POINTS
 
     for i in active_u(20):
-        union = map(lambda q,w: min([q,w]), union, map(lambda a: u(i, a), x))
+        union = map(lambda q,w: min([q,w]), union, 
+            map(lambda a: u(i, a), x))
     
     matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
@@ -189,7 +194,8 @@ def ex3d():
     union = [1]*N_POINTS
 
     for i in active_u(40):
-        union = map(lambda q,w: min([q,w]), union, map(lambda a: u(i, a), x))
+        union = map(lambda q,w: min([q,w]), union, 
+            map(lambda a: u(i, a), x))
     
     matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
@@ -201,7 +207,8 @@ def ex4a():
     union = [0]*N_POINTS
 
     for i in active_u(16.75):
-        union = map(lambda q,w: q+w-q*w, union, map(lambda a: u(i, a), x))
+        union = map(lambda q,w: q+w-q*w, union, 
+            map(lambda a: u(i, a), x))
     
     matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
     matplotlib.pyplot.xlabel('x')
@@ -244,5 +251,45 @@ def ex4d():
     matplotlib.pyplot.ylabel('intersection{active_u(40)}')
     matplotlib.pyplot.show()
 
+def ex5a():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e: max([q,w,e]), map(ua, x),map(ub, x),map(uc, x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+def ex5b():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e: min([q, max([w,e])]), 
+        map(ub, x),map(uc, x),map(ud, x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+def ex5c():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e: max([min([q,w]), min([w,e])]) , 
+        map(ua, x),map(ub, x),map(uc, x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+def ex5d():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e,r: max([1-q,min([w,e]),1-r]),
+         map(ua, x),map(ub, x),map(uc, x), map(ud,x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+
 if __name__ == "__main__":
-    ex4d() 
+    ex5d() 
