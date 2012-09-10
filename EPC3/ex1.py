@@ -244,5 +244,42 @@ def ex4d():
     matplotlib.pyplot.ylabel('intersection{active_u(40)}')
     matplotlib.pyplot.show()
 
+def ex5a():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e: max([q,w,e]), map(ua, x),map(ub, x),map(uc, x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+def ex5b():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e: min([q, max([w,e])]), map(ub, x),map(uc, x),map(ud, x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+def ex5c():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e: max([min([q,w]), min([w,e])]) , map(ua, x),map(ub, x),map(uc, x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+def ex5d():
+    x = numpy.arange(0,50,50.0/N_POINTS)
+
+    res = map(lambda q,w,e,r: max([1-q,min([w,e]),1-r]), map(ua, x),map(ub, x),map(uc, x), map(ud,x))
+    
+    matplotlib.pyplot.scatter(x, res, c = "black", marker = 'o')
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.show()
+
+
 if __name__ == "__main__":
-    ex4d() 
+    ex5d() 
