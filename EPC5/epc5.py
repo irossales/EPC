@@ -63,6 +63,11 @@ def algebric_product_intersec(x_values,u_functions):
 
 
 
+
+########################### Exercises ############################
+
+
+#output
 def ta(x):
     return trapezoidFunc(0,0,5,15,x)
 
@@ -78,7 +83,32 @@ def td(x):
 def te(x):
     return trapezoidFunc(35,45,55,55,x)
     
-    
+
+
+
+def mamdani(ua, ub):
+    la = len(ua)
+    lb = len(ub)
+    return numpy.fromfunction(lambda i,j: numpy.minimum(ua[i],ub[j]),(la,lb),dtype=int)
+
+#input
+def pa(x):
+    return trapezoidFunc(0,0,1,3,x)
+
+def pb(x):
+    return triangleFunc(1,3,5,x)
+
+def pc(x):
+    return triangleFunc(3,5,7,x)
+
+def pd(x):
+    return triangleFunc(5,7,9,x)
+
+def pe(x):
+    return trapezoidFunc(7,9,10,10,x)
+
+
+
 # Ex 1
 def sentence1(x):
     return pc(x) if active(ta(x)) else 0
@@ -97,14 +127,20 @@ def sentence5(x):
 
 
 def plot_u():
-    x = discretize(0,50,500)
-    ya = map(ta, x)
-    yb = map(tb, x)
-    yc = map(tc, x)
-    yd = map(td, x)
-    ye = map(te, x)
+    x1 = discretize(0,50.0,1000)
+    x2 = discretize(0,10.0,1000)
     
+    tad = numpy.array(map(ta, x1))
+    tbd = numpy.array(map(tb, x1))
+    tcd = numpy.array(map(tc, x1))
+    tdd = numpy.array(map(td, x1))
+    ted = numpy.array(map(te, x1))
     
+    pad = numpy.array(map(pa, x1))
+    pbd = numpy.array(map(pb, x1))
+    pcd = numpy.array(map(pc, x1))
+    pdd = numpy.array(map(pd, x1))
+    ped = numpy.array(map(pe, x1))
     
     association={ta:sentence1, tb:sentence2, tc:sentence3, td:sentence4,
                 te:sentence5}
@@ -115,6 +151,19 @@ def plot_u():
     print "Active sentences:", [association[f].__name__ for f in functions]
     
     
+    t = 13.3
+    
+    print min(ta(t),pa(13))
+    
+    
+    
+    s = mamdani(tad,pad)
+    
+    r = tad
+    
+    #~ r = numpy.array(map(lambda u: 1 if active(u(40.0)) else 0, [ta,tb,tc,td,te]))
+    
+    print min_max(r,s)
     
     
     #~ map(lambda x: x.__name__ , functions) 
@@ -166,16 +215,16 @@ def plot_u():
         
     
     
-    #~ matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
+    matplotlib.pyplot.scatter(x1, tad, c = "black", marker = 'o')
     #~ matplotlib.pyplot.scatter(x, ya, c = "brown", marker = 'o')
     #~ matplotlib.pyplot.scatter(x, yb, c = "green", marker = 'o')
     #~ matplotlib.pyplot.scatter(x, yc, c = "pink", marker =  'o')
     #~ matplotlib.pyplot.scatter(x, yd, c = "blue", marker =  'o')
     #~ matplotlib.pyplot.scatter(x, ye, c = "black", marker = 'o')
     
-    #~ matplotlib.pyplot.xlabel('x')
-    #~ matplotlib.pyplot.ylabel('u(x)')
-    #~ matplotlib.pyplot.show()
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('u(x)')
+    matplotlib.pyplot.show()
     
 if __name__ == "__main__":
     plot_u()
