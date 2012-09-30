@@ -67,7 +67,7 @@ def algebric_product_intersec(x_values,u_functions):
 ########################### Exercises ############################
 
 
-#output
+#input
 def ta(x):
     return trapezoidFunc(0,0,5,15,x)
 
@@ -84,14 +84,7 @@ def te(x):
     return trapezoidFunc(35,45,55,55,x)
     
 
-
-
-def mamdani(ua, ub):
-    la = len(ua)
-    lb = len(ub)
-    return numpy.fromfunction(lambda i,j: numpy.minimum(ua[i],ub[j]),(la,lb),dtype=int)
-
-#input
+#output
 def pa(x):
     return trapezoidFunc(0,0,1,3,x)
 
@@ -109,7 +102,6 @@ def pe(x):
 
 
 
-# Ex 1
 def sentence1(x):
     return pc(x) if active(ta(x)) else 0
     
@@ -126,44 +118,56 @@ def sentence5(x):
     return pd(x) if active(te(x)) else 0
 
 
+
+# Ex 1
+def singleton_area(t,pd,x):
+    value = t(x)
+    return map(lambda k:min(value,k), pd)
+    
+     
+def mamdani(ua, ub):
+    la = len(ua)
+    lb = len(ub)
+    return numpy.fromfunction(lambda i,j: numpy.minimum(ua[i],ub[j]),(la,lb),dtype=int)
+
+
 def plot_u():
-    x1 = discretize(0,50.0,1000)
-    x2 = discretize(0,10.0,1000)
+    xt = discretize(0,50.0,1000)
+    xp = discretize(0,10.0,1000)
     
-    tad = numpy.array(map(ta, x1))
-    tbd = numpy.array(map(tb, x1))
-    tcd = numpy.array(map(tc, x1))
-    tdd = numpy.array(map(td, x1))
-    ted = numpy.array(map(te, x1))
+    tad = numpy.array(map(ta, xt))
+    tbd = numpy.array(map(tb, xt))
+    tcd = numpy.array(map(tc, xt))
+    tdd = numpy.array(map(td, xt))
+    ted = numpy.array(map(te, xt))
     
-    pad = numpy.array(map(pa, x1))
-    pbd = numpy.array(map(pb, x1))
-    pcd = numpy.array(map(pc, x1))
-    pdd = numpy.array(map(pd, x1))
-    ped = numpy.array(map(pe, x1))
+    pad = numpy.array(map(pa, xp))
+    pbd = numpy.array(map(pb, xp))
+    pcd = numpy.array(map(pc, xp))
+    pdd = numpy.array(map(pd, xp))
+    ped = numpy.array(map(pe, xp))
     
     association={ta:sentence1, tb:sentence2, tc:sentence3, td:sentence4,
                 te:sentence5}
                 
-    functions = active_list(40.0,[ta,tb,tc,td,te])        
+    functions = active_list(13.3,[ta,tb,tc,td,te])        
     
     print "Active sets:", [f.__name__ for f in functions]
     print "Active sentences:", [association[f].__name__ for f in functions]
     
     
-    t = 13.3
     
-    print min(ta(t),pa(13))
-    
+    output_region = singleton_area(ta,pdd,13.3)
     
     
-    s = mamdani(tad,pad)
     
-    r = tad
-    
+    #~ s = mamdani(tad,pad)
+    #~ 
+    #~ r = tad
+    #~ 
     #~ r = numpy.array(map(lambda u: 1 if active(u(40.0)) else 0, [ta,tb,tc,td,te]))
-    
-    print min_max(r,s)
+    #~ 
+    #~ print min_max(r,s)
     
     
     #~ map(lambda x: x.__name__ , functions) 
@@ -215,7 +219,8 @@ def plot_u():
         
     
     
-    matplotlib.pyplot.scatter(x1, tad, c = "black", marker = 'o')
+    matplotlib.pyplot.scatter(xp, output_region, c = "black", marker = 'o')
+    matplotlib.pyplot.scatter(xp, pdd, c = "black", marker = 'x')
     #~ matplotlib.pyplot.scatter(x, ya, c = "brown", marker = 'o')
     #~ matplotlib.pyplot.scatter(x, yb, c = "green", marker = 'o')
     #~ matplotlib.pyplot.scatter(x, yc, c = "pink", marker =  'o')
