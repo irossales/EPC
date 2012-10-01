@@ -145,16 +145,19 @@ def larsen(ua, ub):
 def min_max(r, s):
     (r_height,r_width) = r.shape
     (un2,s_width) = s.shape
-    result = numpy.empty(r.shape)
-    print s_width,r_height
-    for i in range(s_width):
-        for j in range(r_height):
-            result[i][j] = numpy.max([min(r[i][a],s[a][j]) for a in range(r_width)])
-    print result
+    print r.shape, s.shape
+    result = numpy.empty([r_height,s_width])
+    for i in range(r_height):
+        for j in range(s_width):
+            min_vector = numpy.empty([1,r_width])
+            for a in range(r_width):
+                min_vector[0][a] = min(r[i][a],s[a][j])
+            result[i][j] = numpy.max(min_vector)
+    return result
             
 
 
-def plot_u():
+if __name__ == "__main__":
     xt = discretize(0,50.0,1000)
     xp = discretize(0,10.0,1000)
     
@@ -187,17 +190,17 @@ def plot_u():
     # End of Ex 2
     
     #~ Test min-max
-    r = numpy.array([[0.1, 0.6, 0.4, 0.9],
-        [0.8, 1.0, 0.8, 0.3],
-        [0.5, 0.7, 0.2, 0.0]])
-        
-    s = numpy.array([[0.2, 0.8, 0.6],
-        [0.4, 0.3, 0.1],
-        [1.0, 0.0, 0.7],
-        [0.9, 0.7, 0.2]])
-    
-    
-    print min_max(r,s)
+    #~ r = numpy.array([[0.1, 0.6, 0.4, 0.9],
+        #~ [0.8, 1.0, 0.8, 0.3],
+        #~ [0.5, 0.7, 0.2, 0.0]])
+        #~ 
+    #~ s = numpy.array([[0.2, 0.8, 0.6],
+        #~ [0.4, 0.3, 0.1],
+        #~ [1.0, 0.0, 0.7],
+        #~ [0.9, 0.7, 0.2]])
+    #~ 
+    #~ 
+    #~ print min_max(r,s)
     
     
     #  Test singleton area
@@ -209,12 +212,9 @@ def plot_u():
     
     
     
-    #~ print tad.shape, mamdani(tad,pad).shape
-    #~ tad_m = numpy.mat(tad.copy())
-    #~ print min_max(tad_m,mamdani(tad,pad))
-
-
-    #~ print (tad_m * mamdani(tad,pad))    
+    
+    #~ def apply_fuzzy
+    print min_max(tad.reshape(1,len(tad)), mamdani(tad,pad))    
 
     
     
@@ -228,6 +228,3 @@ def plot_u():
     matplotlib.pyplot.xlabel('x')
     matplotlib.pyplot.ylabel('u(x)')
     matplotlib.pyplot.show()
-    
-if __name__ == "__main__":
-    plot_u()
