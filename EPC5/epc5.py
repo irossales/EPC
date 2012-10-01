@@ -156,6 +156,19 @@ def min_max(r, s):
     return result
             
 
+number = 1
+
+def plot_graph(x,y):
+    global number
+
+    
+    matplotlib.pyplot.scatter(x, y, c = "black", marker = 'x')
+    
+    matplotlib.pyplot.xlabel('x')
+    matplotlib.pyplot.ylabel('t(x)')
+    matplotlib.pyplot.savefig("graph"+str(number)+".png")
+    matplotlib.pyplot.cla()
+    number+=1
 
 if __name__ == "__main__":
     xt = discretize(0,50.0,1000)
@@ -176,55 +189,55 @@ if __name__ == "__main__":
     association={ta:sentence1, tb:sentence2, tc:sentence3, td:sentence4,
                 te:sentence5}
                 
+    discrete_association={ta:tad, tb:tbd, tc:tcd, td:tdd,
+                te:ted}
+                
+    system_association={ta:pad, tb:pbd, tc:pcd, td:pdd,
+                te:ped}
+                
     def active_sets_and_sentences(t):
         functions = active_list(t,[ta,tb,tc,td,te])        
         print "Active sets:", [f.__name__ for f in functions]
         print "Active sentences:", [association[f].__name__ for f in functions]
     
     # Ex 2 
-    active_sets_and_sentences(13.3);
-    active_sets_and_sentences(18.8);
-    active_sets_and_sentences(30.0);
-    active_sets_and_sentences(42.3);
-    active_sets_and_sentences(47.0);
+    for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
+        active_sets_and_sentences(values);
     # End of Ex 2
     
-    #~ Test min-max
-    #~ r = numpy.array([[0.1, 0.6, 0.4, 0.9],
-        #~ [0.8, 1.0, 0.8, 0.3],
-        #~ [0.5, 0.7, 0.2, 0.0]])
-        #~ 
-    #~ s = numpy.array([[0.2, 0.8, 0.6],
-        #~ [0.4, 0.3, 0.1],
-        #~ [1.0, 0.0, 0.7],
-        #~ [0.9, 0.7, 0.2]])
-    #~ 
-    #~ 
-    #~ print min_max(r,s)
     
+    def apply_fuzzy_sentence_mamdani(td,pd):
+        return min_max(td.reshape(1,len(td)), mamdani(td,pd))    
+        
     
-    #  Test singleton area
-    #~ output_region = singleton_area(ta,pdd,13.3)
-    #~ matplotlib.pyplot.scatter(xp, output_region, c = "black", marker = 'o')    
-    
-    #~ Test mamdani
-    #~ print  mamdani(tad,pad)
-    
-    
-    
-    
-    #~ def apply_fuzzy
-    print min_max(tad.reshape(1,len(tad)), mamdani(tad,pad))    
+    #~ Ex 3
+    for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
+        for t in active_list(values,[ta,tb,tc,td,te]):
+            plot_graph(xt,apply_fuzzy_sentence_mamdani(discrete_association[t],system_association[t]))
+    #~ End of Ex 3
 
+
+    def apply_fuzzy_sentence_zadeh(td,pd):
+        return min_max(td.reshape(1,len(td)), zadeh(td,pd))    
+            
+    
+    #~ Ex 4
+    for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
+        for t in active_list(values,[ta,tb,tc,td,te]):
+            plot_graph(xt,apply_fuzzy_sentence_zadeh(discrete_association[t],system_association[t]))
+    #~ End of Ex 4
     
     
-    matplotlib.pyplot.scatter(xp, pdd, c = "black", marker = 'x')
-    #~ matplotlib.pyplot.scatter(x, ya, c = "brown", marker = 'o')
-    #~ matplotlib.pyplot.scatter(x, yb, c = "green", marker = 'o')
-    #~ matplotlib.pyplot.scatter(x, yc, c = "pink", marker =  'o')
-    #~ matplotlib.pyplot.scatter(x, yd, c = "blue", marker =  'o')
-    #~ matplotlib.pyplot.scatter(x, ye, c = "black", marker = 'o')
+    def apply_fuzzy_sentence_larsen(td,pd):
+        return min_max(td.reshape(1,len(td)), larsen(td,pd))    
     
-    matplotlib.pyplot.xlabel('x')
-    matplotlib.pyplot.ylabel('u(x)')
-    matplotlib.pyplot.show()
+    
+    #~ Ex 5
+    for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
+        for t in active_list(values,[ta,tb,tc,td,te]):
+            plot_graph(xt,apply_fuzzy_sentence_larsen(discrete_association[t],system_association[t]))
+    #~ End of Ex 5
+
+
+
+
