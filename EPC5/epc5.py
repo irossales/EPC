@@ -123,12 +123,35 @@ def sentence5(x):
 def singleton_area(t,pd,x):
     value = t(x)
     return map(lambda k:min(value,k), pd)
-    
+#~ End of Ex 1 
      
 def mamdani(ua, ub):
     la = len(ua)
     lb = len(ub)
     return numpy.fromfunction(lambda i,j: numpy.minimum(ua[i],ub[j]),(la,lb),dtype=int)
+
+def zadeh(ua, ub):
+    la = len(ua)
+    lb = len(ub)
+    return numpy.fromfunction(lambda i,j: numpy.maximum(1-ua[i],numpy.minimum(ua[i],ub[j])),(la,lb),dtype=int)
+
+def larsen(ua, ub):
+    la = len(ua)
+    lb = len(ub)
+    return numpy.fromfunction(lambda i,j: ua[i]*ub[j],(la,lb),dtype=int)
+
+
+
+def min_max(r, s):
+    (r_height,r_width) = r.shape
+    (un2,s_width) = s.shape
+    result = numpy.empty(r.shape)
+    print s_width,r_height
+    for i in range(s_width):
+        for j in range(r_height):
+            result[i][j] = numpy.max([min(r[i][a],s[a][j]) for a in range(r_width)])
+    print result
+            
 
 
 def plot_u():
@@ -150,76 +173,51 @@ def plot_u():
     association={ta:sentence1, tb:sentence2, tc:sentence3, td:sentence4,
                 te:sentence5}
                 
-    functions = active_list(13.3,[ta,tb,tc,td,te])        
+    def active_sets_and_sentences(t):
+        functions = active_list(t,[ta,tb,tc,td,te])        
+        print "Active sets:", [f.__name__ for f in functions]
+        print "Active sentences:", [association[f].__name__ for f in functions]
     
-    print "Active sets:", [f.__name__ for f in functions]
-    print "Active sentences:", [association[f].__name__ for f in functions]
+    # Ex 2 
+    active_sets_and_sentences(13.3);
+    active_sets_and_sentences(18.8);
+    active_sets_and_sentences(30.0);
+    active_sets_and_sentences(42.3);
+    active_sets_and_sentences(47.0);
+    # End of Ex 2
     
-    
-    
-    output_region = singleton_area(ta,pdd,13.3)
-    
-    
-    
-    #~ s = mamdani(tad,pad)
-    #~ 
-    #~ r = tad
-    #~ 
-    #~ r = numpy.array(map(lambda u: 1 if active(u(40.0)) else 0, [ta,tb,tc,td,te]))
-    #~ 
-    #~ print min_max(r,s)
-    
-    
-    #~ map(lambda x: x.__name__ , functions) 
-    #~ List Comprehensions are easier to understand for someone who
-    #~ doesnt know how lambda works
-    
-    #~ print map(lambda u: alpha_cut(0.5,u), ya)
-    
-    #~ join = (map(max,ya,yb,yb,yc,yd,ye))
-    
-
-    #~ Ex 3a
-    #~ functions = []
-    #~ for u in [ua,ub,uc,ud,ue]:
-        #~ if active(u(18.5)):
-            #~ functions.append(u)
-    #~ union = max_union(x,functions)
-    #~ matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
-
-    #~ Ex 3b
-    #~ functions = []
-    #~ for u in [ua,ub,uc,ud,ue]:
-        #~ if active(u(37.29)):
-            #~ functions.append(u)
-    #~ union = max_union(x,functions)
-    #~ matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
-
-    #~ Ex 3c
-    #~ functions = []
-    #~ for u in [ua,ub,uc,ud,ue]:
-        #~ if active(u(20.0)):
-            #~ functions.append(u)
-    #~ union = min_intersec(x,functions)
-    #~ matplotlib.pyplot.scatter(x, union, c = "black", marker = 'o')
-
-    #~ Ex 3d
-    #~ functions = []
-    #~ for u in [ua,ub,uc,ud,ue]:
-        #~ if active(u(40.0)):
-            #~ functions.append(u)
-    
-    #~ 3d <- BETTER!
-    #~ union = min_intersec(x,functions)
-    #~ 
-    #~ 4d
-    #~ functions = filter(lambda u: active(u(40.0)), [ua,ub,uc,ud,ue])        
-    #~ union = algebric_product_intersec(x,functions)
-    #~ 
+    #~ Test min-max
+    r = numpy.array([[0.1, 0.6, 0.4, 0.9],
+        [0.8, 1.0, 0.8, 0.3],
+        [0.5, 0.7, 0.2, 0.0]])
         
+    s = numpy.array([[0.2, 0.8, 0.6],
+        [0.4, 0.3, 0.1],
+        [1.0, 0.0, 0.7],
+        [0.9, 0.7, 0.2]])
     
     
-    matplotlib.pyplot.scatter(xp, output_region, c = "black", marker = 'o')
+    print min_max(r,s)
+    
+    
+    #  Test singleton area
+    #~ output_region = singleton_area(ta,pdd,13.3)
+    #~ matplotlib.pyplot.scatter(xp, output_region, c = "black", marker = 'o')    
+    
+    #~ Test mamdani
+    #~ print  mamdani(tad,pad)
+    
+    
+    
+    #~ print tad.shape, mamdani(tad,pad).shape
+    #~ tad_m = numpy.mat(tad.copy())
+    #~ print min_max(tad_m,mamdani(tad,pad))
+
+
+    #~ print (tad_m * mamdani(tad,pad))    
+
+    
+    
     matplotlib.pyplot.scatter(xp, pdd, c = "black", marker = 'x')
     #~ matplotlib.pyplot.scatter(x, ya, c = "brown", marker = 'o')
     #~ matplotlib.pyplot.scatter(x, yb, c = "green", marker = 'o')
