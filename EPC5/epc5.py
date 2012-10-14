@@ -2,6 +2,7 @@ import matplotlib
 import matplotlib.pylab
 import numpy
     
+DISCRETE_POINTS = 1000
     
 def trapezoidFunc(a, m, n, b, x):
     if x < a: 
@@ -128,7 +129,11 @@ def singleton_area(t,pd,x):
 def mamdani(ua, ub):
     la = len(ua)
     lb = len(ub)
-    return numpy.fromfunction(lambda i,j: numpy.minimum(ua[i],ub[j]),(la,lb),dtype=int)
+    saida = numpy.fromfunction(lambda i,j: numpy.minimum(ua[i],ub[j]),(la,lb),dtype=int)
+    #print 'ua', ua
+    #print 'ub', ub
+    #print 'saida', saida
+    return saida
 
 def zadeh(ua, ub):
     la = len(ua)
@@ -140,39 +145,38 @@ def larsen(ua, ub):
     lb = len(ub)
     return numpy.fromfunction(lambda i,j: ua[i]*ub[j],(la,lb),dtype=int)
 
-
-
-def min_max(r, s):
-    (r_height,r_width) = r.shape
-    (un2,s_width) = s.shape
-    print r.shape, s.shape
-    result = numpy.empty([r_height,s_width])
-    for i in range(r_height):
-        for j in range(s_width):
-            min_vector = numpy.empty([1,r_width])
-            for a in range(r_width):
-                min_vector[0][a] = min(r[i][a],s[a][j])
-            result[i][j] = numpy.max(min_vector)
-    return result
+def min_max(r,s):
+    res = []
+    #print 'r',r
+    #print 's', s
+    for x in range(0, len(r)):
+        res.append([])
+        for y in range(0, len(s[0])):
+            maxx = 0
+            for c in range(0, len(r[0])):
+                maxx = max([min([r[x][c],s[c][y]]), maxx])
+            res[x].append(maxx)
+    #print 'res', res
+    return res
             
 
 number = 1
 
 def plot_graph(x,y):
     global number
-
     
     matplotlib.pyplot.scatter(x, y, c = "black", marker = 'x')
     
     matplotlib.pyplot.xlabel('x')
-    matplotlib.pyplot.ylabel('t(x)')
+    matplotlib.pyplot.ylabel('p\'(x)')
+    matplotlib.pyplot.axis([0,50,0,1])
     matplotlib.pyplot.savefig("graph"+str(number)+".png")
     matplotlib.pyplot.cla()
     number+=1
 
 if __name__ == "__main__":
-    xt = discretize(0,50.0,1000)
-    xp = discretize(0,10.0,1000)
+    xt = discretize(0,50.0,DISCRETE_POINTS)
+    xp = discretize(0,10.0,DISCRETE_POINTS)
     
     tad = numpy.array(map(ta, xt))
     tbd = numpy.array(map(tb, xt))
@@ -192,8 +196,8 @@ if __name__ == "__main__":
     discrete_association={ta:tad, tb:tbd, tc:tcd, td:tdd,
                 te:ted}
                 
-    system_association={ta:pad, tb:pbd, tc:pcd, td:pdd,
-                te:ped}
+    system_association={ta:pcd, tb:pad, tc:pdd, td:ped,
+                te:pbd}
                 
     def active_sets_and_sentences(t):
         functions = active_list(t,[ta,tb,tc,td,te])        
@@ -206,36 +210,48 @@ if __name__ == "__main__":
     # End of Ex 2
     
     
-    def apply_fuzzy_sentence_mamdani(td,pd):
-        return min_max(td.reshape(1,len(td)), mamdani(td,pd))    
+    def apply_fuzzy_sentence_mamdani(t, td,pd):
+        a = [0]*DISCRETE_POINTS
+        t = int(t*DISCRETE_POINTS/50)
+        a[t] = 1
+        a2 = numpy.array(a)
+        return min_max(a2.reshape(1,len(a2)), mamdani(td,pd))    
         
     
     #~ Ex 3
     for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
         for t in active_list(values,[ta,tb,tc,td,te]):
-            plot_graph(xt,apply_fuzzy_sentence_mamdani(discrete_association[t],system_association[t]))
+            plot_graph(xp,apply_fuzzy_sentence_mamdani(values, discrete_association[t],system_association[t]))
     #~ End of Ex 3
 
 
-    def apply_fuzzy_sentence_zadeh(td,pd):
-        return min_max(td.reshape(1,len(td)), zadeh(td,pd))    
+    def apply_fuzzy_sentence_zadeh(t, td,pd):
+        a = [0]*DISCRETE_POINTS
+        t = int(t*DISCRETE_POINTS/50)
+        a[t] = 1
+        a2 = numpy.array(a)
+        return min_max(a2.reshape(1,len(a2)), zadeh(td,pd))    
             
     
     #~ Ex 4
     for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
         for t in active_list(values,[ta,tb,tc,td,te]):
-            plot_graph(xt,apply_fuzzy_sentence_zadeh(discrete_association[t],system_association[t]))
+            plot_graph(xt,apply_fuzzy_sentence_zadeh(values, discrete_association[t],system_association[t]))
     #~ End of Ex 4
     
     
-    def apply_fuzzy_sentence_larsen(td,pd):
-        return min_max(td.reshape(1,len(td)), larsen(td,pd))    
+    def apply_fuzzy_sentence_larsen(t, td,pd):
+        a = [0]*DISCRETE_POINTS
+        t = int(t*DISCRETE_POINTS/50)
+        a[t] = 1
+        a2 = numpy.array(a)
+        return min_max(a2.reshape(1,len(a2)), larsen(td,pd))    
     
     
     #~ Ex 5
     for values in [13.3, 18.8, 30.0, 42.3, 47.0]:
         for t in active_list(values,[ta,tb,tc,td,te]):
-            plot_graph(xt,apply_fuzzy_sentence_larsen(discrete_association[t],system_association[t]))
+            plot_graph(xt,apply_fuzzy_sentence_larsen(values, discrete_association[t],system_association[t]))
     #~ End of Ex 5
 
 
