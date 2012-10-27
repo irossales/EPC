@@ -186,18 +186,27 @@ if __name__ == "__main__":
     #f  M   operacao nornal    harmonicos
     #   A   elevacao           harmonicos
     
-    table = [((dht_pequena,vf_muito_baixa),classe_interrupcao),
+    table = dict([((dht_pequena,vf_muito_baixa),classe_interrupcao),
              ((dht_pequena,vf_baixa),classe_afundamento),
              ((dht_pequena,vf_media),classe_operacao_normal),
              ((dht_pequena,vf_alta),classe_elevacao),
              ((dht_pequena,vf_muito_baixa),classe_interrupcao),
              ((dht_pequena,vf_baixa),classe_harmonicas),
              ((dht_pequena,vf_media),classe_harmonicas),
-             ((dht_pequena,vf_alta),classe_harmonicas)]
+             ((dht_pequena,vf_alta),classe_harmonicas)])
              
-    dic = dict(table)
-
-    #print dic
-
-
+    
+    exercices = dict([(1,(0.01,0.34)),
+                     (2,(0.05,16.26)),
+                     (3,(0.50,4,84)),
+                     (4,(0.85,1.79)),
+                     (5,(1.02,0.47)),
+                     (6,(0.97,1.21)),
+                     (7,(1.57,4.76)),
+                     (8,(1.26,1.21)),
+                     (9,(0.99,16.32)),
+                     (10,(1.20,18.96))])
+                     
+    
+                     
 
