@@ -25,8 +25,12 @@ def discretize(start, end, number_of_points):
 def active(u):
     return u > 0.0
     
+def value(u,x):
+    return u(x)
+    
 def active_list(x,u_functions):
-    return filter(lambda u: active(u(x)), u_functions)
+    return filter(lambda u: active(value(u,x)), u_functions)
+    
     
 def alpha_cut(a, u):
     return u >= a
@@ -190,15 +194,15 @@ if __name__ == "__main__":
              ((dht_pequena,vf_baixa),classe_afundamento),
              ((dht_pequena,vf_media),classe_operacao_normal),
              ((dht_pequena,vf_alta),classe_elevacao),
-             ((dht_pequena,vf_muito_baixa),classe_interrupcao),
-             ((dht_pequena,vf_baixa),classe_harmonicas),
-             ((dht_pequena,vf_media),classe_harmonicas),
-             ((dht_pequena,vf_alta),classe_harmonicas)])
+             ((dht_grande,vf_muito_baixa),classe_interrupcao),
+             ((dht_grande,vf_baixa),classe_harmonicas),
+             ((dht_grande,vf_media),classe_harmonicas),
+             ((dht_grande,vf_alta),classe_harmonicas)])
              
     
     exercices = dict([(1,(0.01,0.34)),
                      (2,(0.05,16.26)),
-                     (3,(0.50,4,84)),
+                     (3,(0.50,4.84)),
                      (4,(0.85,1.79)),
                      (5,(1.02,0.47)),
                      (6,(0.97,1.21)),
@@ -206,7 +210,27 @@ if __name__ == "__main__":
                      (8,(1.26,1.21)),
                      (9,(0.99,16.32)),
                      (10,(1.20,18.96))])
+                
+                
+    (vf_value,dht_value) = exercices[1]
+    
+    
+    active_vfs = active_list(vf_value,[vf_muito_baixa,vf_baixa,vf_media,vf_alta]);
+    active_dhts = active_list(dht_value,[dht_pequena,dht_grande])
+    
+    #All combinations of active functions
+    for active_vf in active_vfs:
+        for active_dht in active_dhts:
+            print table[(active_dht,active_vf)]
+            #Using min operator as conective "e"
+            using_conective_e = min(value(active_vf,vf_value),value(active_dht,dht_value))
+            print "Value to use in mamdani:",using_conective_e
+            #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
+            #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
+            #~ print value(active_vf,vf_value)
+            #~ print value(active_dht,dht_value)
                      
+    
     
                      
 
