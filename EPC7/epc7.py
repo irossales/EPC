@@ -175,10 +175,10 @@ if __name__ == "__main__":
     
     #discretized membership functions 
     classe_interrupcao_d = numpy.array(map(classe_interrupcao, x_classe))
-    classe_afundamento_d = numpy.array(map(classe_interrupcao, x_classe)) 
-    classe_operacao_normal_d = numpy.array(map(classe_interrupcao, x_classe))
-    classe_elevacao_d = numpy.array(map(classe_interrupcao, x_classe))
-    classe_harmonicas_d = numpy.array(map(classe_interrupcao, x_classe))
+    classe_afundamento_d = numpy.array(map(classe_afundamento, x_classe)) 
+    classe_operacao_normal_d = numpy.array(map(classe_operacao_normal, x_classe))
+    classe_elevacao_d = numpy.array(map(classe_elevacao, x_classe))
+    classe_harmonicas_d = numpy.array(map(classe_harmonicas, x_classe))
     
     #Table
     #                  DHT
@@ -225,7 +225,7 @@ if __name__ == "__main__":
             print "Value to use in mamdani:",using_conective_e
             output_function_d = table[(active_dht,active_vf)]
             after_mamdani = numpy.minimum(using_conective_e,output_function_d)
-            #plot_graph(x_classe,after_mamdani)
+            plot_graph(x_classe,after_mamdani)
             #agregacao
             valor_final = numpy.maximum(valor_final, after_mamdani)
     
