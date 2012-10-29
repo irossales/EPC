@@ -226,12 +226,24 @@ if __name__ == "__main__":
             output_function_d = table[(active_dht,active_vf)]
             after_mamdani = numpy.minimum(using_conective_e,output_function_d)
             #plot_graph(x_classe,after_mamdani)
-            #agregação
+            #agregacao
             valor_final = numpy.maximum(valor_final, after_mamdani)
             print "Final value:", valor_final
             #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
             #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
-                     
+        
+    y = 0.5
+    if 0.00<y and y<=0.25:
+        print "interrupcao"
+    elif y<=0.42:
+        print "afundamento"
+    elif y <= 0.58:
+        print "operacao normal"
+    elif y<=0.75:
+        print "elevacao"
+    elif y<=1.00:
+        print "harmonicas"
+    
     
     
                      
