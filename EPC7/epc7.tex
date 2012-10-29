@@ -12,6 +12,7 @@
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{caption}
 \usepackage{subcaption}
 \begin{document}
 
@@ -35,7 +36,7 @@
 
 % Title
 \HRule \\[0.6cm]
-{ \huge EPC 6\bfseries }\\[0.6cm]
+{ \huge EPC 7\bfseries }\\[0.6cm]
 
 \HRule \\[2cm]
 
@@ -226,21 +227,22 @@ seguintes situações:
 \begin{center}
 \begin{tabular}{llll}
 Situação & $V_f$(pu) & DHT(\%) & Fenômeno \\
-1 & 0.01 & 0.34 & \\
-2 & 0.05 & 16.26 & \\
-3 & 0.50 & 4.84 & \\
-4 & 0.85 & 1.79 & \\
-5 & 1.02 & 0.47 & \\
-6 & 0.97 & 1.21 & \\
-7 & 1.57 & 4.76 & \\
-8 & 1.26 & 1.21 & \\
-9 & 0.99 & 16.32 & \\
-10 & 1.20 & 18.96 &
+1 & 0.01 & 0.34 & interrupção\\
+2 & 0.05 & 16.26 & interrupção\\
+3 & 0.50 & 4.84 & afundamento\\
+4 & 0.85 & 1.79 & afundamento\\
+5 & 1.02 & 0.47 & operação normal\\
+6 & 0.97 & 1.21 & operação normal\\
+7 & 1.57 & 4.76 & elevação\\
+8 & 1.26 & 1.21 & elevação\\
+9 & 0.99 & 16.32 & harmônicas\\
+10 & 1.20 & 18.96 & harmônicas\\
 \end{tabular}
 \end{center}
 
 
 \newpage
-% \lstinputlisting[language=Python]{ex1.py}
+\lstset{basicstyle=\footnotesize}
+\lstinputlisting[language=Python]{epc7.py}
 
 \end{document}
