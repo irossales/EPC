@@ -73,7 +73,8 @@ def mamdani(ua, ub):
 def zadeh(ua, ub):
     la = len(ua)
     lb = len(ub)
-    return numpy.fromfunction(lambda i,j: numpy.maximum(1-ua[i],numpy.minimum(ua[i],ub[j])),(la,lb),dtype=int)
+    return numpy.fromfunction(lambda i,j:
+        numpy.maximum(1-ua[i],numpy.minimum(ua[i],ub[j])),(la,lb),dtype=int)
 
 def larsen(ua, ub):
     la = len(ua)
@@ -209,7 +210,7 @@ if __name__ == "__main__":
                      (10,(1.20,18.96))])
                 
                 
-    (vf_value,dht_value) = exercices[1]
+    (vf_value,dht_value) = exercices[10]
     
     
     active_vfs = active_list(vf_value,[vf_muito_baixa,vf_baixa,vf_media,vf_alta]);
@@ -247,7 +248,7 @@ if __name__ == "__main__":
             #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
             #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
         
-    y = 0.5
+    y = class_value
     if 0.00<y and y<=0.25:
         print "interrupcao"
     elif y<=0.42:
