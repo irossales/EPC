@@ -225,19 +225,20 @@ if __name__ == "__main__":
             print "Value to use in mamdani:",using_conective_e
             output_function_d = table[(active_dht,active_vf)]
             after_mamdani = numpy.minimum(using_conective_e,output_function_d)
-            plot_graph(x_classe,after_mamdani)
+            #~ plot_graph(x_classe,after_mamdani)
             #agregacao
             valor_final = numpy.maximum(valor_final, after_mamdani)
     
     #~ print "Final value:", valor_final
     max_values_position = map(lambda u: False if u <> max(valor_final) else True, valor_final)
-    print max_values_position
+   
     
     total_sum=0
     
     for i in range(len(max_values_position)):
         if max_values_position[i]:
-            total_sum+=i
+            total_sum+=x_classe[i]
+
             
     class_value = total_sum/numpy.sum(max_values_position)
 
