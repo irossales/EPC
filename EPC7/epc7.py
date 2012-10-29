@@ -215,6 +215,8 @@ if __name__ == "__main__":
     active_vfs = active_list(vf_value,[vf_muito_baixa,vf_baixa,vf_media,vf_alta]);
     active_dhts = active_list(dht_value,[dht_pequena,dht_grande])
     
+    valor_final = 0
+
     #All combinations of active functions
     for active_vf in active_vfs:
         for active_dht in active_dhts:
@@ -223,7 +225,10 @@ if __name__ == "__main__":
             print "Value to use in mamdani:",using_conective_e
             output_function_d = table[(active_dht,active_vf)]
             after_mamdani = numpy.minimum(using_conective_e,output_function_d)
-            plot_graph(x_classe,after_mamdani)
+            #plot_graph(x_classe,after_mamdani)
+            #agregação
+            valor_final = numpy.maximum(valor_final, after_mamdani)
+            print "Final value:", valor_final
             #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
             #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
                      
