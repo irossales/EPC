@@ -25,11 +25,8 @@ def discretize(start, end, number_of_points):
 def active(u):
     return u > 0.0
     
-def value(u,x):
-    return u(x)
-    
 def active_list(x,u_functions):
-    return filter(lambda u: active(value(u,x)), u_functions)
+    return filter(lambda u: active(u(x)), u_functions)
     
     
 def alpha_cut(a, u):
@@ -165,17 +162,17 @@ if __name__ == "__main__":
     #output discretization
     x_classe = numpy.linspace(0,1.0,num=DISCRETE_POINTS)
     
-    
+    #discretized membership functions 
     vf_muito_baixa_d = numpy.array(map(vf_muito_baixa, x_vf))
     vf_baixa_d = numpy.array(map(vf_baixa, x_vf))
     vf_media_d = numpy.array(map(vf_media, x_vf))
     vf_alta_d = numpy.array(map(vf_alta, x_vf))
     
-    
+    #discretized membership functions 
     dht_pequena_d = numpy.array(map(dht_pequena, x_dht))
     dht_grande_d = numpy.array(map(dht_grande, x_dht))
     
-    
+    #discretized membership functions 
     classe_interrupcao_d = numpy.array(map(classe_interrupcao, x_classe))
     classe_afundamento_d = numpy.array(map(classe_interrupcao, x_classe)) 
     classe_operacao_normal_d = numpy.array(map(classe_interrupcao, x_classe))
@@ -190,14 +187,14 @@ if __name__ == "__main__":
     #f  M   operacao nornal    harmonicos
     #   A   elevacao           harmonicos
     
-    table = dict([((dht_pequena,vf_muito_baixa),classe_interrupcao),
-             ((dht_pequena,vf_baixa),classe_afundamento),
-             ((dht_pequena,vf_media),classe_operacao_normal),
-             ((dht_pequena,vf_alta),classe_elevacao),
-             ((dht_grande,vf_muito_baixa),classe_interrupcao),
-             ((dht_grande,vf_baixa),classe_harmonicas),
-             ((dht_grande,vf_media),classe_harmonicas),
-             ((dht_grande,vf_alta),classe_harmonicas)])
+    table = dict([((dht_pequena_d,vf_muito_baixa_d),classe_interrupcao),
+             ((dht_pequena_d,vf_baixa_d),classe_afundamento_d),
+             ((dht_pequena_d,vf_media_d),classe_operacao_normal_d),
+             ((dht_pequena_d,vf_alta_d),classe_elevacao_d),
+             ((dht_grande_d,vf_muito_baixa_d),classe_interrupcao_d),
+             ((dht_grande_d,vf_baixa_d),classe_harmonicas_d),
+             ((dht_grande_d,vf_media_d),classe_harmonicas_d),
+             ((dht_grande_d,vf_alta_d),classe_harmonicas_d)])
              
     
     exercices = dict([(1,(0.01,0.34)),
@@ -223,7 +220,7 @@ if __name__ == "__main__":
         for active_dht in active_dhts:
             print table[(active_dht,active_vf)]
             #Using min operator as conective "e"
-            using_conective_e = min(value(active_vf,vf_value),value(active_dht,dht_value))
+            using_conective_e = min(active_vf(vf_value),active_dht(dht_value))
             print "Value to use in mamdani:",using_conective_e
             #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
             #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
