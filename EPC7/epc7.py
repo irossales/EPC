@@ -106,8 +106,9 @@ def plot_graph(x,y):
     
     matplotlib.pyplot.xlabel('x')
     matplotlib.pyplot.ylabel('p\'(x)')
-    matplotlib.pyplot.axis([0,50,0,1])
-    matplotlib.pyplot.savefig("graph"+str(number)+".png")
+    matplotlib.pyplot.axis([min(x),max(x),min(y),max(y)])
+    #~ matplotlib.pyplot.savefig("graph"+str(number)+".png")
+    matplotlib.pyplot.show();
     matplotlib.pyplot.cla()
     number+=1
 
@@ -187,16 +188,15 @@ if __name__ == "__main__":
     #f  M   operacao nornal    harmonicos
     #   A   elevacao           harmonicos
     
-    table = dict([((dht_pequena_d,vf_muito_baixa_d),classe_interrupcao),
-             ((dht_pequena_d,vf_baixa_d),classe_afundamento_d),
-             ((dht_pequena_d,vf_media_d),classe_operacao_normal_d),
-             ((dht_pequena_d,vf_alta_d),classe_elevacao_d),
-             ((dht_grande_d,vf_muito_baixa_d),classe_interrupcao_d),
-             ((dht_grande_d,vf_baixa_d),classe_harmonicas_d),
-             ((dht_grande_d,vf_media_d),classe_harmonicas_d),
-             ((dht_grande_d,vf_alta_d),classe_harmonicas_d)])
+    table = dict([((dht_pequena,vf_muito_baixa),classe_interrupcao_d),
+             ((dht_pequena,vf_baixa),classe_afundamento_d),
+             ((dht_pequena,vf_media),classe_operacao_normal_d),
+             ((dht_pequena,vf_alta),classe_elevacao_d),
+             ((dht_grande,vf_muito_baixa),classe_interrupcao_d),
+             ((dht_grande,vf_baixa),classe_harmonicas_d),
+             ((dht_grande,vf_media),classe_harmonicas_d),
+             ((dht_grande,vf_alta),classe_harmonicas_d)])
              
-    
     exercices = dict([(1,(0.01,0.34)),
                      (2,(0.05,16.26)),
                      (3,(0.50,4.84)),
@@ -218,14 +218,14 @@ if __name__ == "__main__":
     #All combinations of active functions
     for active_vf in active_vfs:
         for active_dht in active_dhts:
-            print table[(active_dht,active_vf)]
             #Using min operator as conective "e"
             using_conective_e = min(active_vf(vf_value),active_dht(dht_value))
             print "Value to use in mamdani:",using_conective_e
+            output_function_d = table[(active_dht,active_vf)]
+            after_mamdani = numpy.minimum(using_conective_e,output_function_d)
+            plot_graph(x_classe,after_mamdani)
             #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
             #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
-            #~ print value(active_vf,vf_value)
-            #~ print value(active_dht,dht_value)
                      
     
     
