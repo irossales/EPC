@@ -104,6 +104,8 @@ def plot_graph(x,y):
     matplotlib.pyplot.cla()
     number+=1
 
+def weighted_mean(y, u):
+    return map(lambda a, b: a*b, y, u)/sum(u)
 
 ########################### Exercises ############################
 #Classe de forma de onda
