@@ -175,9 +175,6 @@ if __name__ == "__main__":
     coefficients6 = numpy.linalg.lstsq(a6[0:, 0:4], a6[0:, 4])[0]
     coefficients7 = numpy.linalg.lstsq(a7[0:, 0:4], a7[0:, 4])[0]
     coefficients8 = numpy.linalg.lstsq(a8[0:, 0:4], a8[0:, 4])[0]
-    
-    print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coefficients1
-    print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coefficients2
 
     x_d = numpy.linspace(0, 1.0, num=DISCRETE_POINTS)
 
@@ -196,56 +193,66 @@ if __name__ == "__main__":
                         (3,(0.0004, 0.6916, 0.5006)),
                         (4,(0.5102, 0.7464, 0.0860)), 
                         (5,(0.0611, 0.2860, 0.7464))])
-    (x1ex, x2ex, x3ex) = exercises[5]
-
-    #plot_graph(x_d, active_list_d(x1, [x1A_d, x1B_d])[0])
-
-    active_x1 = active_list_d(x1ex, [x1A_d, x1B_d])
-    active_x2 = active_list_d(x2ex, [x2A_d, x2B_d])
-    active_x3 = active_list_d(x3ex, [x3A_d, x3B_d])
-
-    u_final = []
-    y_final = []
-
-    for ax1 in active_x1:
-        for ax2 in active_x2:
-            for ax3 in active_x3:
-                using_conective_d = min(get_approx_value(ax1, x1ex, 1.0), get_approx_value(ax2, x2ex, 1.0), get_approx_value(ax3, x3ex, 1.0))
-                u_final.append(using_conective_d)
-
-                if numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3A_d):
-                    print 'Regra 1'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients1))
-
-                elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3B_d):
-                    print 'Regra 2'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients2))
-
-                elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3A_d):
-                    print 'Regra 3'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients3))
-
-                elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3B_d):
-                    print 'Regra 4'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients4))
-
-                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3A_d):
-
-                    print 'Regra 5'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients5))
-
-                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3B_d):
-                    print 'Regra 6'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients6))
-
-                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3A_d):
-                    print 'Regra 7'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients7))
-
-                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3B_d):
-                    print 'Regra 8'
-                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients8))
-
-    print 'Final Y:', weighted_mean(y_final, u_final)
     
+    
+    for (x1ex, x2ex, x3ex) in  [exercises[1],exercises[2],exercises[3],exercises[4],exercises[5]]:
+
+        #plot_graph(x_d, active_list_d(x1, [x1A_d, x1B_d])[0])
+
+        active_x1 = active_list_d(x1ex, [x1A_d, x1B_d])
+        active_x2 = active_list_d(x2ex, [x2A_d, x2B_d])
+        active_x3 = active_list_d(x3ex, [x3A_d, x3B_d])
+
+        u_final = []
+        y_final = []
+
+        for ax1 in active_x1:
+            for ax2 in active_x2:
+                for ax3 in active_x3:
+                    using_conective_d = min(get_approx_value(ax1, x1ex, 1.0), get_approx_value(ax2, x2ex, 1.0), get_approx_value(ax3, x3ex, 1.0))
+                    u_final.append(using_conective_d)
+
+                    if numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3A_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients1)
+                        print 'Regra 1 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+
+                    elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3B_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients2)
+                        print 'Regra 2 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+                    elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3A_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients3)
+                        print 'Regra 3 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+                    elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3B_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients4)
+                        print 'Regra 4 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+                    elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3A_d):                        
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients5)
+                        print 'Regra 5 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+                    elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3B_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients6)
+                        print 'Regra 6 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+                    elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3A_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients7)
+                        print 'Regra 7 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+                    elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3B_d):
+                        contribuicao = ycoef(x1ex, x2ex, x3ex, coefficients8)
+                        print 'Regra 8 , y da regra:',contribuicao, 'peso da regra', using_conective_d , "\\\\"
+                        y_final.append(contribuicao)
+                        
+        print 'Resposta y=', weighted_mean(y_final, u_final)
+        print 'Fim exercicio'
+        
 

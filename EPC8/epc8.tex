@@ -95,7 +95,7 @@ cada uma das variáveis.
 
 \begin{figure}[hptb]
 \centering
-\includegraphics[scale=0.7]{fig1.eps}
+\includegraphics[scale=0.7]{fig.png}
 \caption{Funções de pertinência das variáveis de entrada.}
 \label{fig:fig1}
 \end{figure}
@@ -111,189 +111,66 @@ método de Takagi-Sugeno em função das contribuições resultantes de todas as
 ativadas.
 \item[3.] Considere os seguintes valores de $x_1, x_2 e x_3$ que foram adquiridos em tempo real pelos
 instrumentos de medição do processo, os quais são definidos por:
+
+As regras $R_i$ são do tipo ''Se ($x_1$ é ...) e ($x_2$ é ...) e ($x_3$ é ...)
+Então $f_i(x_1, x_2, x_3)$'', estão listadas na tabela abaixo:\\
+
+\begin{center}
+\begin{tabular}{ll}
+Regra & Funções ativas(x1:x2:x3)\\
+Regra 1 & AAA\\
+Regra 2 & AAB\\
+Regra 3 & ABA\\
+Regra 4 & ABB\\
+Regra 5 & BAA\\
+Regra 6 & BAB\\
+Regra 7 & BBA\\
+Regra 8 & BBB
+\end{tabular}
+\end{center}
+
 \begin{enumerate}
-\item[a)]
-Valor de $x_1$ = 0,1399 e $x_2$ = 0,1610 e $x_3$ = 0,2477
-\item[b)]
-Valor de $x_1$ = 0,9430 e $x_2$ = 0,4476 e $x_3$ = 0,2648
-\item[c)]
-Valor de $x_1$ = 0,0004 e $x_2$ = 0,6916 e $x_3$ = 0,5006
-\item[d)]
-Valor de $x_1$ = 0,5102 e $x_2$ = 0,7464 e $x_3$ = 0,0860
-\item[e)]
-Valor de $x_1$ = 0,0611 e $x_2$ = 0,2860 e $x_3$ = 0,7464
+\item[a)] Valor de $x_1$ = 0,1399 e $x_2$ = 0,1610 e $x_3$ = 0,2477\\
+Regra 1 , y da regra: 0.284809830064 peso da regra 0.505505505506 \\
+Regra 2 , y da regra: 0.289501198838 peso da regra 0.309059059059 \\
+Regra 3 , y da regra: 0.296425119576 peso da regra 0.214881548215 \\
+Regra 4 , y da regra: 0.295725149287 peso da regra 0.214881548215 \\
+Resposta y= 0.289865831231
+
+\item[b)]Valor de $x_1$ = 0,9430 e $x_2$ = 0,4476 e $x_3$ = 0,2648\\
+Regra 5 , y da regra: 0.681786107175 peso da regra 0.471471471471 \\
+Regra 6 , y da regra: 0.689832367726 peso da regra 0.33033033033 \\
+Regra 7 , y da regra: 0.672374545124 peso da regra 0.471471471471 \\
+Regra 8 , y da regra: 0.676181160042 peso da regra 0.33033033033 \\
+Resposta y= 0.67952192971
+
+\item[c)]Valor de $x_1$ = 0,0004 e $x_2$ = 0,6916 e $x_3$ = 0,5006\\
+Regra 2 , y da regra: 0.539823513565 peso da regra 0.116616616617 \\
+Regra 4 , y da regra: 0.50301035033 peso da regra 0.625625625626 \\
+Resposta y= 0.508794212119
+
+\item[d)]Valor de $x_1$ = 0,5102 e $x_2$ = 0,7464 e $x_3$ = 0,0860\\
+Regra 1 , y da regra: 0.620404723659 peso da regra 0.00650650650651 \\
+Regra 2 , y da regra: 0.640662621487 peso da regra 0.00650650650651 \\
+Regra 3 , y da regra: 0.578664224572 peso da regra 0.473723723724 \\
+Regra 4 , y da regra: 0.600108637446 peso da regra 0.107607607608 \\
+Regra 5 , y da regra: 0.617386611231 peso da regra 0.00650650650651 \\
+Regra 6 , y da regra: 0.643546906933 peso da regra 0.00650650650651 \\
+Regra 7 , y da regra: 0.574730861855 peso da regra 0.526276276276 \\
+Regra 8 , y da regra: 0.603524919873 peso da regra 0.107607607608 \\
+Resposta y= 0.582097748324
+
+\item[e)]Valor de $x_1$ = 0,0611 e $x_2$ = 0,2860 e $x_3$ = 0,7464\\
+Regra 2 , y da regra: 0.476088129606 peso da regra 0.927427427427 \\
+Regra 4 , y da regra: 0.476661549281 peso da regra 0.381715048382 \\
+Resposta y= 0.47625532525
+
 \end{enumerate}
 Determine, para cada um dos valores acima, o valor final de saída do sistema \emph{fuzzy}
 considerando a contribuição de cada uma das regras ativadas e suas respectivas funções de
 regressão, listando ainda quais as regras \emph{fuzzy} que estarão associadas com o cálculo do
 resultado final do sistema \emph{fuzzy}.
 \end{enumerate}
-
-
-
-
-%Para um sistema elétrico de potência, representado na Figura 1, há a necessidade de
-%se classificar distúrbios relacionados à qualidade da energia elétrica.
-%
-%\begin{figure}[hptb]
-%\centering
-%\includegraphics[scale=.6]{diagrama.png}
-%\label{diagrama}
-%\caption{Diagrama do sistema de potência.}
-%\end{figure}
-%
-%Assim, baseado em medições de grandezas elétricas, pretende-se projetar um sistema
-%fuzzy de tipo Mamdani para classificar os seguintes tipos de distúrbios:
-%
-%\begin{enumerate}
-% \item Interrupção
-% \item Afundamento
-% \item Elevação
-% \item Operação Normal
-% \item Presença de Harmônicas
-%\end{enumerate}
-%
-%A ilustração do sistema fuzzy é mostrada na Figura \ref{esquematico}, cujas variáveis de entrada são a
-%tensão fundamental ($V_f$) em p.u. (per unit) e a distorção harmônica total (DHT) em \%.
-%
-%\begin{figure}[hptb]
-%\centering
-%\includegraphics[scale=.6]{esquematico.png}
-%\label{esquematico}
-%\caption{Diagrama esquemático do sistema fuzzy.}
-%\end{figure}
-%
-%Implemente então um sistema fuzzy do tipo Mamdani com as seguintes características:
-%
-%\begin{enumerate}
-% \item Utilizar 200 pontos de discretização para todos os universos de discurso.
-% \item Utilizar operador de composição do tipo Max-Min.
-% \item Utilizar como operador de implicação o operador de Mamdani.
-% \item Utilizar como operador de agregação o operador Máximo.
-% \item Utilizar o operador Mínimo para o conectivo “e”.
-%\end{enumerate}
-%
-%As especificações das variáveis de entradas e saída são definidas conforme se segue.
-%
-%\section{Entrada 1: Tensão Fundamental ($V_f$)}
-%
-%Variável lingüística: Vf (pu)
-%
-%Termos Lingüísticos: “Muito Baixa”, “Baixa”, “Média” e “Alta”
-%
-%Funções de Pertinência: “Trapezoidal”
-%
-%Universo de discurso: [0;1,8] (p.u.)
-%
-%
-%\begin{center}
-%\begin{tabular}{lllll}
-%Termo Lingüístico & a & m & n & b\\
-%Muito Baixa & 0.00 & 0.00 & 0.09 & 0.12\\
-%Baixa & 0.09 & 0.12 & 0.94 & 0.96\\
-%Média & 0.94 & 0.96 & 1.04 & 1.06\\
-%Alta & 1.04 & 1.10 & 1.80 & 1.80\\
-%\end{tabular}
-%\end{center}
-%
-%
-%
-%\section{Entrada 2: Distorção Harmônica Total em \% (DHT)}
-%
-% Variável linguística: DHT (\%)
-%
-% Termos Linguísticos: “Pequena”, “Grande”
-%
-% Funções de Pertinência: “Trapezoidal”
-%
-% Universo de discurso: [0;100] (\%)
-%
-%
-%\begin{center}
-%\begin{tabular}{lllll}
-%Termo Linguístico & a & m & n & b\\
-%Pequena & 0 & 0 & 5 & 6\\
-%Grande & 5 & 7 & 100 & 100
-%\end{tabular}
-%\end{center}
-%
-%
-%
-%\section{Saída: Classe da Forma de Onda}
-%
-%Variável lingüística: Classe
-%
-%Termos Lingüísticos: “Interrupção”, “Afundamento”, “Elevação”, “Operação Normal”, “Presença de Harmônicas”
-%
-%Funções de Pertinência: “Triangulares”
-%
-%Universo de discurso: [0 1] (normalizado)
-%
-%
-%\begin{center}
-%\begin{tabular}{llll}
-%Termo Lingüístico & a & m & b\\
-%Interrupção & 0.000 & 0.167 & 0.333\\
-%Afundamento & 0.167 & 0.333 & 0.500\\
-%Operação Normal & 0.333 & 0.5 & 0.667\\
-%Elevação & 0.500 & 0.667 & 0.833\\
-%Harmônicas & 0.667 & 0.833 & 1.000
-%\end{tabular}
-%\end{center}
-%
-%O conjunto de regras é especificado em função das seguintes sentenças lingüísticas:\\
-%Regra 1 -> Se Vf é Muito Baixa e DHT é Pequena então Saída é Interrupção.\\
-%Regra 2 -> Se Vf é Baixa e DHT é Pequena então Saída é Afundamento.\\
-%Regra 3 -> Se Vf é Média e DHT é Pequena então Saída é Operação Normal.\\
-%Regra 4 -> Se Vf é Alta e DHT é Pequena então Saída é Elevação.\\
-%Regra 5 -> Se Vf é Muito Baixa e DHT é Grande então Saída é Interrupção.\\
-%Regra 6 -> Se Vf é Baixa e DHT é Grande então Saída é Harmônicos.\\
-%Regra 7 -> Se Vf é Média e DHT é Grande então Saída é Harmônicos.\\
-%Regra 8 -> Se  Vf é Alta e  DHT é Grande então Saída é Harmônicos.\\
-%
-%Como estratégia para definição de classes, utilize então as seguintes faixas:
-%
-%\begin{figure}[hptb]
-%\centering
-%\includegraphics[scale=.6]{classe.png}
-%\label{esquematico}
-%\caption{Classes de saída}
-%\end{figure}
-%
-%
-%\begin{center}
-%\begin{tabular}{ll}
-%Fenômeno & Saída (y)\\
-%Classe 1 – Interrupção & 0.00 < y $\leq$ 0.25 \\
-%Classe 2 – Afundamento & 0.25 < y $\leq$ 0.42 \\
-%Classe 3 – Operação Normal & 0.42 < y $\leq$ 0.58 \\
-%Classe 4 – Elevação & 0.58 < y $\leq$ 0.75 \\
-%Classe 5 – Harmônicas & 0.75 < y $\leq$ 1.00
-%\end{tabular}
-%\end{center}
-%
-%
-%
-%
-%Após a implementação de todo o sistema fuzzy, aplique-o então para classificar as
-%seguintes situações:
-%
-%
-%\begin{center}
-%\begin{tabular}{llll}
-%Situação & $V_f$(pu) & DHT(\%) & Fenômeno \\
-%1 & 0.01 & 0.34 & interrupção\\
-%2 & 0.05 & 16.26 & interrupção\\
-%3 & 0.50 & 4.84 & afundamento\\
-%4 & 0.85 & 1.79 & afundamento\\
-%5 & 1.02 & 0.47 & operação normal\\
-%6 & 0.97 & 1.21 & operação normal\\
-%7 & 1.57 & 4.76 & elevação\\
-%8 & 1.26 & 1.21 & elevação\\
-%9 & 0.99 & 16.32 & harmônicas\\
-%10 & 1.20 & 18.96 & harmônicas\\
-%\end{tabular}
-%\end{center}
 
 
 \newpage
