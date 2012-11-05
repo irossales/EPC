@@ -175,6 +175,15 @@ if __name__ == "__main__":
     coefficients6 = numpy.linalg.lstsq(a6[0:, 0:4], a6[0:, 4])[0]
     coefficients7 = numpy.linalg.lstsq(a7[0:, 0:4], a7[0:, 4])[0]
     coefficients8 = numpy.linalg.lstsq(a8[0:, 0:4], a8[0:, 4])[0]
+    
+    print "Regra 1: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients1,"\\\\"
+    print "Regra 2: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients2,"\\\\"
+    print "Regra 3: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients3,"\\\\"
+    print "Regra 4: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients4,"\\\\"
+    print "Regra 5: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients5,"\\\\"
+    print "Regra 6: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients6,"\\\\"
+    print "Regra 7: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients7,"\\\\"
+    print "Regra 8: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d):",coefficients8 ,"\\\\"
 
     x_d = numpy.linspace(0, 1.0, num=DISCRETE_POINTS)
 
