@@ -29,6 +29,10 @@ def active(u):
     
 def active_list(x,u_functions):
     return filter(lambda u: active(u(x)), u_functions)
+
+
+def active_list_d(x,vectors):
+    return filter(lambda u: get_approx_value(u, x, 1.0)>0.0, vectors)
     
 def alpha_cut(a, u):
     return u >= a
@@ -152,28 +156,18 @@ if __name__ == "__main__":
     print 'x1A_d', x1A_d
     print 'approx', get_approx_value(x1A_d, 0.699999, 1.0)
 
+    exercises = dict([(1,(0.1399, 0.1610, 0.2477)),
+                        (2,(0.9430, 0.4476, 0.2648)),
+                        (3,(0.0004, 0.6916, 0.5006)),
+                        (4,(0.5102, 0.7464, 0.0860)), 
+                        (5,(0.0611, 0.2860, 0.7464))])
+    (x1, x2, x3) = exercises[1]
 
-   # #input discretization
-   # x_vf = numpy.linspace(0,1.8,num=DISCRETE_POINTS)
-   # x_dht = numpy.linspace(0,100,num=DISCRETE_POINTS)
-   # #output discretization
-   # x_classe = numpy.linspace(0,1.0,num=DISCRETE_POINTS)
-   # 
-   # #discretized membership functions 
-   # vf_muito_baixa_d = numpy.array(map(vf_muito_baixa, x_vf))
-   # vf_baixa_d = numpy.array(map(vf_baixa, x_vf))
-   # vf_media_d = numpy.array(map(vf_media, x_vf))
-   # vf_alta_d = numpy.array(map(vf_alta, x_vf))
-   # 
-   # #discretized membership functions 
-   # dht_pequena_d = numpy.array(map(dht_pequena, x_dht))
-   # dht_grande_d = numpy.array(map(dht_grande, x_dht))
-   # 
-   # #discretized membership functions 
-   # classe_interrupcao_d = numpy.array(map(classe_interrupcao, x_classe))
-   # classe_afundamento_d = numpy.array(map(classe_afundamento, x_classe)) 
-   # classe_operacao_normal_d = numpy.array(map(classe_operacao_normal, x_classe))
-   # classe_elevacao_d = numpy.array(map(classe_elevacao, x_classe))
-   # classe_harmonicas_d = numpy.array(map(classe_harmonicas, x_classe))
-   # 
+    #plot_graph(x_d, active_list_d(x1, [x1A_d, x1B_d])[0])
+
+    active_x1 = active_list_d(x1, [x1A_d, x1B_d])
+    active_x2 = active_list_d(x2, [x2A_d, x2B_d])
+    active_x3 = active_list_d(x3, [x3A_d, x3B_d])
+
+
 
