@@ -131,8 +131,20 @@ if __name__ == "__main__":
     DISCRETE_POINTS=1000
     
     my_data = recfromcsv("dados.csv")
-    print my_data['amostra']
-    print my_data['x1']
+    x1=numpy.vstack(my_data['x1'])
+    x2=numpy.vstack(my_data['x2'])
+    x3=numpy.vstack(my_data['x3'])
+    constant=numpy.vstack(numpy.ones_like(x1))
+    
+    #~ A = [c , x1, x2, x3]
+    A = numpy.hstack([constant,x1,x2,x3])
+    
+    f=my_data['f']
+    #~  Least-squares solution for A*coeficients=f
+    
+    coeficients = numpy.linalg.lstsq(A, f)[0]
+    
+    print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coeficients
 
    # #input discretization
    # x_vf = numpy.linspace(0,1.8,num=DISCRETE_POINTS)
