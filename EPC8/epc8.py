@@ -147,14 +147,33 @@ if __name__ == "__main__":
     constant=numpy.vstack(numpy.ones_like(x1))
     
     #~ A = [c , x1, x2, x3]
-    A = numpy.hstack([constant,x1,x2,x3])
-    
     f=my_data['f']
+    A = numpy.hstack([constant,x1,x2,x3,numpy.vstack(f)])
+    
+    
     #~  Least-squares solution for A*coeficients=f
+
+    a1 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]<=0.75 and u[3]<=0.5, A))
+    a2 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]<=0.75 and u[3]>0.0, A))
+    a3 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]>0.0 and u[3]<=0.5, A))
+    a4 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]>0.0 and u[3]>0.0, A))
+    a5 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]<=0.75 and u[3]<=0.5, A))
+    a6 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]<=0.75 and u[3]>0.0, A))
+    a7 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]>0.0 and u[3]<=0.5, A))
+    a8 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]>0.0 and u[3]>0.0, A))
+    print 'a1', a8 
     
-    coeficients = numpy.linalg.lstsq(A, f)[0]
+    coefficients1 = numpy.linalg.lstsq(a1[0:, 0:3], a1[0:, 4])[0]
+    coefficients2 = numpy.linalg.lstsq(a2[0:, 0:3], a2[0:, 4])[0]
+    coefficients3 = numpy.linalg.lstsq(a3[0:, 0:3], a3[0:, 4])[0]
+    coefficients4 = numpy.linalg.lstsq(a4[0:, 0:3], a4[0:, 4])[0]
+    coefficients5 = numpy.linalg.lstsq(a5[0:, 0:3], a5[0:, 4])[0]
+    coefficients6 = numpy.linalg.lstsq(a6[0:, 0:3], a6[0:, 4])[0]
+    coefficients7 = numpy.linalg.lstsq(a7[0:, 0:3], a7[0:, 4])[0]
+    coefficients8 = numpy.linalg.lstsq(a8[0:, 0:3], a8[0:, 4])[0]
     
-    print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coeficients
+    print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coefficients1
+    print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coefficients2
 
     x_d = numpy.linspace(0, 1.0, num=DISCRETE_POINTS)
 
@@ -165,21 +184,21 @@ if __name__ == "__main__":
     x3A_d = numpy.array(map(x3A, x_d))
     x3B_d = numpy.array(map(x3B, x_d))
     
-    print 'x1A_d', x1A_d
-    print 'approx', get_approx_value(x1A_d, 0.699999, 1.0)
+    #print 'x1A_d', x1A_d
+    #print 'approx', get_approx_value(x1A_d, 0.699999, 1.0)
 
     exercises = dict([(1,(0.1399, 0.1610, 0.2477)),
                         (2,(0.9430, 0.4476, 0.2648)),
                         (3,(0.0004, 0.6916, 0.5006)),
                         (4,(0.5102, 0.7464, 0.0860)), 
                         (5,(0.0611, 0.2860, 0.7464))])
-    (x1, x2, x3) = exercises[1]
+    (x1ex, x2ex, x3ex) = exercises[1]
 
     #plot_graph(x_d, active_list_d(x1, [x1A_d, x1B_d])[0])
 
-    active_x1 = active_list_d(x1, [x1A_d, x1B_d])
-    active_x2 = active_list_d(x2, [x2A_d, x2B_d])
-    active_x3 = active_list_d(x3, [x3A_d, x3B_d])
+    active_x1 = active_list_d(x1ex, [x1A_d, x1B_d])
+    active_x2 = active_list_d(x2ex, [x2A_d, x2B_d])
+    active_x3 = active_list_d(x3ex, [x3A_d, x3B_d])
 
 
 
