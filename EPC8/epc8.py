@@ -111,7 +111,8 @@ def plot_graph(x,y):
     number+=1
 
 def weighted_mean(y, u):
-    return map(lambda a, b: a*b, y, u)/sum(u)
+    z = sum(map(lambda a, b: a*b, y,u))
+    return (z/sum(u))
 
 def get_approx_value(vector, index, max_index):
     approx_index = int(len(vector)*index/max_index)
@@ -129,13 +130,17 @@ def x2A(x):
     return trapezoidFunc(0, 0, 0.25, 0.75, x)
 
 def x2B(x):
-    return trapezoidFunc(0.25, 0.75, 1.0, 1.0, x)
+    return trapezoidFunc(0, 0.75, 1.0, 1.0, x)
 
 def x3A(x):
     return triangleFunc(0, 0, 0.5, x)
 
 def x3B(x):
     return trapezoidFunc(0, 0.8, 1.0, 1.0, x)
+
+def ycoef(x1,x2,x3,coef):
+   return x1*coef[1]+x2*coef[2]+x3*coef[3]+coef[0]
+
 
 if __name__ == "__main__":
     DISCRETE_POINTS=1000
@@ -154,23 +159,22 @@ if __name__ == "__main__":
     #~  Least-squares solution for A*coeficients=f
 
     a1 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]<=0.75 and u[3]<=0.5, A))
-    a2 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]<=0.75 and u[3]>0.0, A))
-    a3 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]>0.0 and u[3]<=0.5, A))
-    a4 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]>0.0 and u[3]>0.0, A))
+    a2 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]<=0.75 and u[3]>=0.0, A))
+    a3 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]>=0.0 and u[3]<=0.5, A))
+    a4 = numpy.array(filter(lambda u: u[1]<=0.7 and u[2]>=0.0 and u[3]>=0.0, A))
     a5 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]<=0.75 and u[3]<=0.5, A))
     a6 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]<=0.75 and u[3]>0.0, A))
     a7 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]>0.0 and u[3]<=0.5, A))
     a8 = numpy.array(filter(lambda u: u[1]>0.3 and u[2]>0.0 and u[3]>0.0, A))
-    print 'a1', a8 
     
-    coefficients1 = numpy.linalg.lstsq(a1[0:, 0:3], a1[0:, 4])[0]
-    coefficients2 = numpy.linalg.lstsq(a2[0:, 0:3], a2[0:, 4])[0]
-    coefficients3 = numpy.linalg.lstsq(a3[0:, 0:3], a3[0:, 4])[0]
-    coefficients4 = numpy.linalg.lstsq(a4[0:, 0:3], a4[0:, 4])[0]
-    coefficients5 = numpy.linalg.lstsq(a5[0:, 0:3], a5[0:, 4])[0]
-    coefficients6 = numpy.linalg.lstsq(a6[0:, 0:3], a6[0:, 4])[0]
-    coefficients7 = numpy.linalg.lstsq(a7[0:, 0:3], a7[0:, 4])[0]
-    coefficients8 = numpy.linalg.lstsq(a8[0:, 0:3], a8[0:, 4])[0]
+    coefficients1 = numpy.linalg.lstsq(a1[0:, 0:4], a1[0:, 4])[0]
+    coefficients2 = numpy.linalg.lstsq(a2[0:, 0:4], a2[0:, 4])[0]
+    coefficients3 = numpy.linalg.lstsq(a3[0:, 0:4], a3[0:, 4])[0]
+    coefficients4 = numpy.linalg.lstsq(a4[0:, 0:4], a4[0:, 4])[0]
+    coefficients5 = numpy.linalg.lstsq(a5[0:, 0:4], a5[0:, 4])[0]
+    coefficients6 = numpy.linalg.lstsq(a6[0:, 0:4], a6[0:, 4])[0]
+    coefficients7 = numpy.linalg.lstsq(a7[0:, 0:4], a7[0:, 4])[0]
+    coefficients8 = numpy.linalg.lstsq(a8[0:, 0:4], a8[0:, 4])[0]
     
     print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coefficients1
     print "Values(d,a,b,c) for f = a*x1 + b*x2 + c*x3 + d):",coefficients2
@@ -192,7 +196,7 @@ if __name__ == "__main__":
                         (3,(0.0004, 0.6916, 0.5006)),
                         (4,(0.5102, 0.7464, 0.0860)), 
                         (5,(0.0611, 0.2860, 0.7464))])
-    (x1ex, x2ex, x3ex) = exercises[1]
+    (x1ex, x2ex, x3ex) = exercises[5]
 
     #plot_graph(x_d, active_list_d(x1, [x1A_d, x1B_d])[0])
 
@@ -200,5 +204,48 @@ if __name__ == "__main__":
     active_x2 = active_list_d(x2ex, [x2A_d, x2B_d])
     active_x3 = active_list_d(x3ex, [x3A_d, x3B_d])
 
+    u_final = []
+    y_final = []
 
+    for ax1 in active_x1:
+        for ax2 in active_x2:
+            for ax3 in active_x3:
+                using_conective_d = min(get_approx_value(ax1, x1ex, 1.0), get_approx_value(ax2, x2ex, 1.0), get_approx_value(ax3, x3ex, 1.0))
+                u_final.append(using_conective_d)
+
+                if numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3A_d):
+                    print 'Regra 1'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients1))
+
+                elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3B_d):
+                    print 'Regra 2'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients2))
+
+                elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3A_d):
+                    print 'Regra 3'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients3))
+
+                elif numpy.allclose(ax1,x1A_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3B_d):
+                    print 'Regra 4'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients4))
+
+                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3A_d):
+
+                    print 'Regra 5'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients5))
+
+                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2A_d) and numpy.allclose(ax3,x3B_d):
+                    print 'Regra 6'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients6))
+
+                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3A_d):
+                    print 'Regra 7'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients7))
+
+                elif numpy.allclose(ax1,x1B_d) and numpy.allclose(ax2,x2B_d) and numpy.allclose(ax3,x3B_d):
+                    print 'Regra 8'
+                    y_final.append(ycoef(x1ex, x2ex, x3ex, coefficients8))
+
+    print 'Final Y:', weighted_mean(y_final, u_final)
+    
 
