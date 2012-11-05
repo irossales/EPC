@@ -3,6 +3,8 @@
 import matplotlib
 import matplotlib.pylab
 import numpy
+import csv
+from numpy import recfromcsv
     
 def trapezoidFunc(a, m, n, b, x):
     if x < a: 
@@ -157,110 +159,6 @@ def classe_harmonicas(x):
     
 
 if __name__ == "__main__":
-    DISCRETE_POINTS=200
-    #input discretization
-    x_vf = numpy.linspace(0,1.8,num=DISCRETE_POINTS)
-    x_dht = numpy.linspace(0,100,num=DISCRETE_POINTS)
-    #output discretization
-    x_classe = numpy.linspace(0,1.0,num=DISCRETE_POINTS)
-    
-    #discretized membership functions 
-    vf_muito_baixa_d = numpy.array(map(vf_muito_baixa, x_vf))
-    vf_baixa_d = numpy.array(map(vf_baixa, x_vf))
-    vf_media_d = numpy.array(map(vf_media, x_vf))
-    vf_alta_d = numpy.array(map(vf_alta, x_vf))
-    
-    #discretized membership functions 
-    dht_pequena_d = numpy.array(map(dht_pequena, x_dht))
-    dht_grande_d = numpy.array(map(dht_grande, x_dht))
-    
-    #discretized membership functions 
-    classe_interrupcao_d = numpy.array(map(classe_interrupcao, x_classe))
-    classe_afundamento_d = numpy.array(map(classe_afundamento, x_classe)) 
-    classe_operacao_normal_d = numpy.array(map(classe_operacao_normal, x_classe))
-    classe_elevacao_d = numpy.array(map(classe_elevacao, x_classe))
-    classe_harmonicas_d = numpy.array(map(classe_harmonicas, x_classe))
-    
-    #Table
-    #                  DHT
-    #       Pequena            Grande 
-    #   MB  interrupcao        interrupcao
-    #V  B   afundamento        harmonicos
-    #f  M   operacao nornal    harmonicos
-    #   A   elevacao           harmonicos
-    
-    table = dict([((dht_pequena,vf_muito_baixa),classe_interrupcao_d),
-             ((dht_pequena,vf_baixa),classe_afundamento_d),
-             ((dht_pequena,vf_media),classe_operacao_normal_d),
-             ((dht_pequena,vf_alta),classe_elevacao_d),
-             ((dht_grande,vf_muito_baixa),classe_interrupcao_d),
-             ((dht_grande,vf_baixa),classe_harmonicas_d),
-             ((dht_grande,vf_media),classe_harmonicas_d),
-             ((dht_grande,vf_alta),classe_harmonicas_d)])
-             
-    exercices = dict([(1,(0.01,0.34)),
-                     (2,(0.05,16.26)),
-                     (3,(0.50,4.84)),
-                     (4,(0.85,1.79)),
-                     (5,(1.02,0.47)),
-                     (6,(0.97,1.21)),
-                     (7,(1.57,4.76)),
-                     (8,(1.26,1.21)),
-                     (9,(0.99,16.32)),
-                     (10,(1.20,18.96))])
-                
-                
-    (vf_value,dht_value) = exercices[10]
-    
-    
-    active_vfs = active_list(vf_value,[vf_muito_baixa,vf_baixa,vf_media,vf_alta]);
-    active_dhts = active_list(dht_value,[dht_pequena,dht_grande])
-    
-    valor_final = 0
-
-    #All combinations of active functions
-    for active_vf in active_vfs:
-        for active_dht in active_dhts:
-            #Using min operator as conective "e"
-            using_conective_e = min(active_vf(vf_value),active_dht(dht_value))
-            print "Value to use in mamdani:",using_conective_e
-            output_function_d = table[(active_dht,active_vf)]
-            after_mamdani = numpy.minimum(using_conective_e,output_function_d)
-            #plot_graph(x_classe,after_mamdani)
-            #agregacao
-            valor_final = numpy.maximum(valor_final, after_mamdani)
-    
-    #~ print "Final value:", valor_final
-    max_values_position = map(lambda u: False if u <> max(valor_final) else True, valor_final)
-   
-    
-    total_sum=0
-    
-    for i in range(len(max_values_position)):
-        if max_values_position[i]:
-            total_sum+=x_classe[i]
-
-            
-    class_value = total_sum/numpy.sum(max_values_position)
-
-    print class_value
-    
-            #~ print vf_value, "->", active_vf, "->", active_vf(vf_value)
-            #~ print dht_value, "->", active_dht, "->", active_dht(dht_value)
-        
-    y = class_value
-    if 0.00<y and y<=0.25:
-        print "interrupcao"
-    elif y<=0.42:
-        print "afundamento"
-    elif y <= 0.58:
-        print "operacao normal"
-    elif y<=0.75:
-        print "elevacao"
-    elif y<=1.00:
-        print "harmonicas"
-    
-    
-    
-                     
-
+    my_data = recfromcsv("dados.csv")
+    print my_data['amostra']
+    print my_data['x1']
