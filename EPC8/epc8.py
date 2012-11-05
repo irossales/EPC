@@ -109,6 +109,10 @@ def plot_graph(x,y):
 def weighted_mean(y, u):
     return map(lambda a, b: a*b, y, u)/sum(u)
 
+def get_approx_value(vector, index, max_index):
+    approx_index = int(len(vector)*index/max_index)
+    return vector[approx_index]
+
 ########################### Exercises ############################
 #Classe de forma de onda
 def x1A(x):
@@ -135,6 +139,19 @@ if __name__ == "__main__":
     my_data = recfromcsv("dados.csv")
     print my_data['amostra']
     print my_data['x1']
+
+    x_d = numpy.linspace(0, 1.0, num=DISCRETE_POINTS)
+
+    x1A_d = numpy.array(map(x1A, x_d))
+    x1B_d = numpy.array(map(x1B, x_d))
+    x2A_d = numpy.array(map(x2A, x_d))
+    x2B_d = numpy.array(map(x2B, x_d))
+    x3A_d = numpy.array(map(x3A, x_d))
+    x3B_d = numpy.array(map(x3B, x_d))
+    
+    print 'x1A_d', x1A_d
+    print 'approx', get_approx_value(x1A_d, 0.699999, 1.0)
+
 
    # #input discretization
    # x_vf = numpy.linspace(0,1.8,num=DISCRETE_POINTS)
