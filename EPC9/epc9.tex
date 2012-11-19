@@ -1,0 +1,139 @@
+\documentclass{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+%\usepackage{hyperref}
+\usepackage[portuges,brazilian]{babel}
+\usepackage{graphicx, subfigure}
+\usepackage{textcomp}
+\usepackage{fullpage}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{pdfpages}
+
+\begin{document}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\tsize}[1]{(\frac{W}{L})_{#1}}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% START TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{titlepage}
+
+\begin{center}
+
+
+{\LARGE UNIVERSIDADE DE SÃO PAULO\\}
+{\LARGE DEPARTAMENTO DE ENGENHARIA ELÉTRICA \\}
+{\LARGE ESCOLA DE ENGENHARIA DE SÃO CARLOS\\[4cm]}
+
+\textbf{\large SEL5755 - Sistemas Fuzzy}\\[1cm]
+\textbf{\large Prof Dr. Ivan Nunes da Silva}\\[2cm]
+
+
+% Title
+\HRule \\[0.6cm]
+{ \huge EPC 9\bfseries }\\[0.6cm]
+
+\HRule \\[2cm]
+
+% Author
+
+\begin{center} \large
+\end{center}
+
+\begin{minipage}{\textwidth}
+\begin{flushleft} \large
+Isabela R. do Prado \textsc{Rossales}\\
+6445435
+\end{flushleft}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large São Carlos,\\ \today}
+
+\end{center}
+
+\end{titlepage}
+%\listoffigures
+%\begingroup
+%\let\clearpage\relax
+%\listoftables
+%\endgroup
+%%%%%%%%%%%%%%%%%%%%%%%%%% STOP TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%5
+
+
+\newpage
+
+\includepdf[pages=1]{EPC09_Fuzzy.pdf}
+\includepdf[pages=2]{EPC09_Fuzzy.pdf}
+
+
+\begin{enumerate}
+\item[1.]
+    A seguir encontram-se as funções de regressão:
+Regra 1: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.07288626  0.35329376  0.34483924  0.46038057] \\
+Regra 2: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.08024507  0.43866452  0.37704934  0.34253576] \\
+Regra 3: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.08576458  0.44031065  0.32608057  0.3669811 ] \\
+Regra 4: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.08248229  0.49501087  0.3198011   0.34368151] \\
+Regra 5: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.02553684  0.41387792  0.37903706  0.50861781] \\
+Regra 6: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.07768514  0.44502256  0.42353619  0.31139994] \\
+Regra 7: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.07609611  0.41948343  0.338711    0.38855778] \\
+Regra 8: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.13746759  0.48807292  0.26222153  0.30703768] \\
+Regra 9: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.13746759  0.48807292  0.26222153  0.30703768] \\
+Regra 10: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.13746759  0.48807292  0.26222153  0.30703768] \\
+Regra 11: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.13746759  0.48807292  0.26222153  0.30703768] \\
+Regra 12: Valores(d,a,b,c) para f = a*x1 + b*x2 + c*x3 + d): [ 0.13746759  0.48807292  0.26222153  0.30703768] \\
+
+\item[4.]
+ A seguir Tabela \ref{tab:1} mostra as classes atribuídas pelo sistema.
+
+\begin{table}[h!]
+\begin{center}
+\caption{Valores de entrada e saída do sistema \emph{fuzzy}.}
+\begin{tabular}{c|c|c|c|c}
+\textbf{$x_1$} & \textbf{$x_2$} & \textbf{$x_3$} & \textbf{Valor \emph{fuzzy}} &\textbf{Classe atribuída}\\
+0.3395& 0.0022& 0.0087& 0.1850 & A \\ 
+0.5102& 0.7464& 0.0860& 0.5841 & C \\ 
+0.7382& 0.2647& 0.1916& 0.6021 & C \\ 
+0.0029& 0.3264& 0.2476& 0.2962 & B \\ 
+0.1399& 0.1610& 0.2477& 0.2879 & B \\ 
+0.9430& 0.4476& 0.2648& 0.7964 & D \\ 
+0.8401& 0.4490& 0.2719& 0.7487 & C \\ 
+0.7088& 0.9342& 0.2763& 0.8086 & D \\
+0.1957& 0.8423& 0.3085& 0.5573 & C \\
+0.0004& 0.6916& 0.5006& 0.4767 & B \\ 
+0.6492& 0.0007& 0.6422& 0.6091 & C \\ 
+0.1283& 0.1882& 0.7253& 0.4548 & B \\ 
+0.2299& 0.1524& 0.7353& 0.4860 & B \\ 
+0.0611& 0.2860& 0.7464& 0.4706 & B \\ 
+0.1903& 0.6523& 0.7820& 0.6554 & C \\ 
+0.2225& 0.9182& 0.7820& 0.7481 & C \\ 
+0.6423& 0.3229& 0.8567& 0.7833 & D \\ 
+0.3879& 0.1307& 0.8656& 0.5841 & C \\
+0.8882& 0.3077& 0.8931& 0.9259 & D \\ 
+0.1818& 0.5078& 0.9046& 0.6506 & C \\ 
+\end{tabular} 
+\label{tab:1}
+\end{center}
+\end{table}
+
+\item[5.]
+Caso a etapa de pré-processamento seja alterada, as funções de regressão serão alteradas e consequentemente
+a classificação final. Igualmente, se a etapa de pós-processamento for alterada, a classe atribuída
+será influenciada de forma direta.
+
+\end{enumerate}
+
+\cleardoublepage
+\lstset{basicstyle=\scriptsize}
+\lstinputlisting[language=Python]{epc9.py}
+%\lstinputlisting{resp.txt}
+
+\end{document}
